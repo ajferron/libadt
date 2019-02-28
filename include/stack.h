@@ -3,13 +3,13 @@
 
 #include "libadt.h"
 
-// Return pointer to memory allocation for stack (struct adt)
+// Initialize stack data structure (LIFO).
 stack Stack(void);
 
-// Add item to the top of stack
+// Add item to the top of stack.
 void push(stack, int32_t);
 
-// Remove and return the last item added
-void* pop(stack);
+// Remove and return the last item added.
+int32_t pop(stack);
 
 #endif

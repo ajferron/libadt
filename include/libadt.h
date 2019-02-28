@@ -17,27 +17,27 @@ struct adt {
     int length;
     frame *head;
     frame *tail;
-    int32_t **map;
+    int32_t *map;
 };
 
 typedef struct adt adt, *list, *stack, *que;
 
-// Return a pointer to an array with all items in data structure
+// Return a pointer to an array of all items in data structure (where index 0 = peek()).
 int32_t* toArray(adt *);
 
-// Return 1 if length is 0, and 0 if length is any other value
+// Return 1 if length is 0 and 0 if any other value.
 int isEmpty(adt *);
 
-// Return the number of items in data structure
+// Return the number of items in data structure.
 int length(adt *);
 
-// Free all memory associated with data structure. Use List()/Stack()/Que() to re-initialize
+// Free data structure and all memory associated. Use List()/Stack()/Que() to re-initialize.
 void clear(adt *);
 
 /* Return the head of the data structure
- * List: returns first item added
- * Stack: returns last item added
- * Que: returns first item added */
+ * List: head = first item added
+ * Stack: head = last item added
+ * Que: head = first item added */
 int32_t peek(adt *);
 
 #endif

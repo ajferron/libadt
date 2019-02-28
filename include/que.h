@@ -3,13 +3,13 @@
 
 #include "libadt.h"
 
-// Return pointer to memory allocation for que (struct adt)
+// Initialize que data structure (FIFO).
 que Que(void);
 
-// Add item to top of que
+// Add item to top of que.
 void enque(que, int32_t);
 
-// Remove and return bottom (oldest) item in que
-int* deque(que);
+// Remove and return bottom item in que.
+int32_t deque(que);
 
 #endif
