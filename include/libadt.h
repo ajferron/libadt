@@ -18,7 +18,7 @@ struct adt {
 typedef struct adt adt, *list, *stack, *que;
 
 // Return a pointer to an array with all items in data structure
-void *toArray(adt *);
+void** toArray(adt *);
 
 // Return 1 if length is 0, and 0 if length is any other value
 int isEmpty(adt *);
