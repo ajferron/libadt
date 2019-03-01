@@ -1,10 +1,9 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
-#include <stdint.h>
-#include "libadt.h"
+#include "adt.h"
 
-enum occurrence {first, last}
+enum occurrence {first, last};
 
 // Initialize list data structure.
 list List(void);
@@ -25,7 +24,7 @@ int32_t get(list, int);
 int find(list, int32_t, occurrence);
 
 // Set the value at an index.
-int set(list, int, int32_t)
+int set(list, int, int32_t);
 
 // Remove a index and return it's value.
 int32_t remove(list, int);

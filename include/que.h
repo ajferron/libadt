@@ -1,7 +1,7 @@
 #ifndef _QUE_H_
 #define _QUE_H_
 
-#include "libadt.h"
+#include "adt.h"
 
 // Initialize que data structure (FIFO).
 que Que(void);

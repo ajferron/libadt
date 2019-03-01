@@ -1,7 +1,7 @@
 #ifndef _STACK_H_
 #define _STACK_H_
 
-#include "libadt.h"
+#include "adt.h"
 
 // Initialize stack data structure (LIFO).
 stack Stack(void);

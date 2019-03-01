@@ -2,12 +2,10 @@
 #define _LIBADT_H_
 
 #include <stdlib.h>
-#include "list.h"
-#include "stack.h"
-#include "que.h"
+#include <stdint.h>
 
 struct frame {
-    int32_t *data;
+    int32_t data;
     struct frame *next;
 };
 
@@ -22,8 +20,11 @@ struct adt {
 
 typedef struct adt adt, *list, *stack, *que;
 
-// Return a pointer to an array of all items in data structure (where index 0 = peek()).
-int32_t* toArray(adt *);
+// Return a pointer to an array of all items in data structure.
+void* toArray(adt *);
+
+// Return a pointer to an array of characters in data structure.
+char* toString(adt *, char *);
 
 // Return 1 if length is 0 and 0 if any other value.
 int isEmpty(adt *);
