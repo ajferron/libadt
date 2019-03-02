@@ -2,6 +2,7 @@
 #define _LIBADT_H_
 
 #include <stdlib.h>
+#include <string.h>
 #include <stdint.h>
 
 struct frame {
@@ -25,9 +26,6 @@ void* toArray(adt *);
 
 // Return a pointer to an array of characters in data structure.
 char* toString(adt *, char *);
-
-// Return 1 if length is 0 and 0 if any other value.
-int isEmpty(adt *);
 
 // Return the number of items in data structure.
 int length(adt *);

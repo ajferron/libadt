@@ -14,4 +14,4 @@ test: abslib.a src/test.c
 	$(CC) obj/test.o lib/abslib.a -o ./bin/test
 
 clean:
-	rm -rf ./obj/* ./bin/*
+	rm -rf obj/* bin/* lib/abslib.a
