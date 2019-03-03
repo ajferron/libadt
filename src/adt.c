@@ -2,46 +2,43 @@
 #include "adt.h"
 
 void* toArray(adt* t) {
-    if (length(t)) {
-        frame* f = t->head;
-        int len = t->length;
-        int i;
+    frame* f = t->head;
 
-        int32_t *a = malloc(sizeof(int32_t) * len);
+    if (!length(t))
+        return NULL;
 
-        for (i = 0; i < len; i++) {
-            a[i] = f->data;
-            f = f->next;
-        }
-        
-        return a;
+    int32_t *a = malloc(sizeof(int32_t) * length(t));
+
+    for (int i = 0; i < length(t); i++) {
+        a[i] = f->data;
+        f = f->next;
     }
-
-    return NULL;
+    
+    return a;
 }
 
 char* toString(adt* t, char* iterable) {
-    if (length(t)) {
-        frame* f = t->head;
-        int len = t->length + (strlen(iterable) * t->length);
-        int i = 0;
+    if (!length(t))
+        return NULL;
 
-        char *s = malloc((sizeof(char)) * len);
+    frame* f = t->head;
+    int len = t->length + (strlen(iterable) * t->length);
+    int i = 0;
+
+    char *s = malloc((sizeof(char)) * len);
+    
+    while (1) {
+        sprintf(&s[i], "%c", (char) f->data);
         
-        while (1) {
-            sprintf(&s[i], "%c", (char) f->data);
-            
-            if ((f = f->next) == NULL)
-                break;
+        if ((f = f->next) == NULL)
+            break;
 
-            strcat(s, iterable);
-            i += strlen(iterable) + 1;
-        }
-
-        return s;
+        strcat(s, iterable);
+        i += strlen(iterable) + 1;
     }
 
-    return NULL;
+    return s;
+
 }
 
 int32_t peek(adt* t) {
@@ -61,11 +58,9 @@ void clear(adt* t) {
             free(t->head);
             t->head = f;
         }
-
-        free(t->map);
-        t->length = 0;
-        t->tail = NULL;
     }
+
+    t->tail = NULL;
 
     free(t);
     t = NULL;

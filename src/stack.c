@@ -3,15 +3,14 @@
 stack Stack(void) {
     stack s = malloc(sizeof(adt));
     s->head = s->tail = NULL;
-    s->map = NULL;
     s->length = 0;
     return s;
 }
 
-void push(stack s, int32_t d) {
+void push(stack s, int32_t data) {
     frame *f = malloc(sizeof(frame));
 
-    f->data = d;
+    f->data = data;
     f->next = s->head;
     s->head = f;
     s->length++;
@@ -20,9 +19,10 @@ void push(stack s, int32_t d) {
 int32_t pop(stack s) {
     frame *f = s->head;
     s->head = f->next;
-    int d = f->data;
+
+    int32_t data = f->data;
     s->length--;
     free(f);
 
-    return d;
+    return data;
 }

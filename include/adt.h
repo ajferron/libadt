@@ -16,7 +16,6 @@ struct adt {
     int length;
     frame *head;
     frame *tail;
-    int32_t *map;
 };
 
 typedef struct adt adt, *list, *stack, *que;
