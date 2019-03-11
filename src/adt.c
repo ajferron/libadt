@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "adt.h"
 
-void* toArray(adt* t) {
+void* to_array(adt* t) {
     frame* f = t->head;
 
     if (!length(t))
         return NULL;
 
-    int32_t *a = malloc(sizeof(int32_t) * length(t));
+    int *a = malloc(sizeof(int) * length(t));
 
     for (int i = 0; i < length(t); i++) {
         a[i] = f->data;
@@ -17,7 +17,7 @@ void* toArray(adt* t) {
     return a;
 }
 
-char* toString(adt* t, char* iterable) {
+char* to_string(adt* t, char* iterable) {
     if (!length(t))
         return NULL;
 
@@ -41,12 +41,17 @@ char* toString(adt* t, char* iterable) {
 
 }
 
-int32_t peek(adt* t) {
-    return (t->head->data);
+int peek(adt* t) {
+    check_adt(t, "Can not peek empty structure");
+
+    return t->head->data;
 }
 
 int length(adt* t) {
-    return t->length;
+    if (t != NULL)
+        return t->length;
+    
+    return -1;
 }
 
 void clear(adt* t) {
@@ -64,4 +69,11 @@ void clear(adt* t) {
 
     free(t);
     t = NULL;
+}
+
+void check_adt(adt* t, char* msg) {
+    if (!length(t)) {
+        printf("%s\n", msg);
+        exit(1);
+    }
 }

@@ -1,13 +1,13 @@
 #include "adt.h"
 
-stack Stack(void) {
+stack init_stack(void) {
     stack s = malloc(sizeof(adt));
     s->head = s->tail = NULL;
     s->length = 0;
     return s;
 }
 
-void push(stack s, int32_t data) {
+void push(stack s, int data) {
     frame *f = malloc(sizeof(frame));
 
     f->data = data;
@@ -16,11 +16,13 @@ void push(stack s, int32_t data) {
     s->length++;
 }
 
-int32_t pop(stack s) {
+int pop(stack s) {
+    check_adt(s, "Can not pop items from empty stack");
+
     frame *f = s->head;
     s->head = f->next;
 
-    int32_t data = f->data;
+    int data = f->data;
     s->length--;
     free(f);
 

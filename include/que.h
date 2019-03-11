@@ -4,12 +4,12 @@
 #include "adt.h"
 
 // Initialize que data structure (FIFO).
-que Que(void);
+que init_que(void);
 
 // Add item to top of que.
-void enque(que, int32_t);
+void enque(que, int data);
 
 // Remove and return bottom item in que.
-int32_t deque(que);
+int deque(que);
 
 #endif

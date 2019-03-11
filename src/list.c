@@ -1,33 +1,59 @@
 #include "adt.h"
-#include "que.h"
 
-list List(void) {
-    stack l = malloc(sizeof(adt));
+list init_list(void) {
+    list l = malloc(sizeof(adt));
     l->head = l->tail = NULL;
     l->length = 0;
     return l;
 }
 
-void add(list l, int32_t data) {
-    enque(l, data);
+void add(list l, int data) {
+    frame *f = malloc(sizeof(frame));
+
+    f->data = data;
+    f->next = NULL;
+
+    if (l->tail != NULL)
+        l->tail->next = f;
+
+    l->tail = f;
+    l->length++;
+
+    if (l->head == NULL)
+        l->head = l->tail;
 }
 
-int32_t get(list l, int index) {
+void insert(list l, int index, int data) {
+    check_adt(l, "Index out of list range");
+
+    frame *f = malloc(sizeof(frame));
+    frame *h = l->head;
+
+    for (int i = 0; i <= index; i++)
+        h = h->next;
+
+    f->data = data;
+    f->next = h->next;
+    h->next = f;
+}
+
+int get(list l, int index) {
+    check_adt(l, "Index out of list range");
+
     frame *f = l->head;
     
-    for (int i = 0; i <= index; i++)
+    for (int i = 0; i < index && f->next != NULL; i++)
         f = f->next;
 
     return f->data;
 }
 
-int set(list l, int index, int32_t data) {
-    if (index > length(l))
-        return 0;
+int set(list l, int index, int data) {
+    check_adt(l, "Index out of list range");
 
     frame *f = l->head;
 
-    for (int i = 0; i <= index; i++)
+    for (int i = 0; i < index; i++)
         f = f->next;
 
     f->data = data;
@@ -35,7 +61,7 @@ int set(list l, int index, int32_t data) {
     return 1;
 }
 
-int find(list l, int32_t target) {
+int find(list l, int target) {
     frame *f = l->head;
 
     for (int i = 0; i < length(l); i++) {
@@ -48,7 +74,9 @@ int find(list l, int32_t target) {
     return -1;
 }
 
-int32_t delete(list l, int index) {
+int cut(list l, int index) {
+    check_adt(l, "Can not cut items from empty list");
+
     frame* f = l->head;
 
     for (int i = 0; i < index; i++)
