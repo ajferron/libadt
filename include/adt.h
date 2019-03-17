@@ -38,6 +38,6 @@ void clear(adt *);
  * Que: head = first item added */
 int peek(adt *);
 
-void check_adt(adt*, char* msg);
+void check_adt(adt*, int min, char* msg);
 
 #endif

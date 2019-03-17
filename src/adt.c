@@ -4,12 +4,12 @@
 void* to_array(adt* t) {
     frame* f = t->head;
 
-    if (!length(t))
+    if (!t->length)
         return NULL;
 
-    int *a = malloc(sizeof(int) * length(t));
+    int *a = malloc(sizeof(int) * t->length);
 
-    for (int i = 0; i < length(t); i++) {
+    for (int i = 0; i < t->length; i++) {
         a[i] = f->data;
         f = f->next;
     }
@@ -18,7 +18,7 @@ void* to_array(adt* t) {
 }
 
 char* to_string(adt* t, char* iterable) {
-    if (!length(t))
+    if (!t->length)
         return NULL;
 
     frame* f = t->head;
@@ -42,7 +42,7 @@ char* to_string(adt* t, char* iterable) {
 }
 
 int peek(adt* t) {
-    check_adt(t, "Can not peek empty structure");
+    check_adt(t, 0, "Can not peek empty structure");
 
     return t->head->data;
 }
@@ -55,7 +55,7 @@ int length(adt* t) {
 }
 
 void clear(adt* t) {
-    if (length(t)) {
+    if (t->length) {
         frame* f = t->head;
 
         while (t->head != NULL) {
@@ -71,9 +71,9 @@ void clear(adt* t) {
     t = NULL;
 }
 
-void check_adt(adt* t, char* msg) {
-    if (!length(t)) {
-        printf("%s\n", msg);
+void check_adt(adt* t, int min, char* msg) {
+    if (t == NULL || t->head == NULL || !t->length || t->length < min) {
+        printf("\n%s\n", msg);
         exit(1);
     }
 }

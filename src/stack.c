@@ -17,7 +17,7 @@ void push(stack s, int data) {
 }
 
 int pop(stack s) {
-    check_adt(s, "Can not pop items from empty stack");
+    check_adt(s, 0, "Can not pop items from empty stack");
 
     frame *f = s->head;
     s->head = f->next;

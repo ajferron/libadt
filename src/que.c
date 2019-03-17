@@ -24,6 +24,7 @@ void enque(que q, int data) {
 }
 
 int deque(que q) {
+    check_adt(q, 0, "Can not deque items from empty que");
     frame *f = q->head;
     q->head = f->next;
     
