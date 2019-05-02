@@ -8,15 +8,15 @@ que init_que(void) {
 }
 
 void enque(que q, int data) {
-    frame *f = malloc(sizeof(frame));
+    node *n = malloc(sizeof(node));
 
-    f->data = data;
-    f->next = NULL;
+    n->data = data;
+    n->next = NULL;
 
     if (q->tail != NULL)
-        q->tail->next = f;
+        q->tail->next = n;
 
-    q->tail = f;
+    q->tail = n;
     q->length++;
 
     if (q->head == NULL)
@@ -24,13 +24,12 @@ void enque(que q, int data) {
 }
 
 int deque(que q) {
-    check_adt(q, 0, "Can not deque items from empty que");
-    frame *f = q->head;
-    q->head = f->next;
+    node *n = q->head;
+    q->head = n->next;
     
-    int data = f->data;
+    int data = n->data;
     q->length--;
-    free(f);
+    free(n);
 
     return data;
 }

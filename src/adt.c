@@ -2,7 +2,7 @@
 #include "adt.h"
 
 void* to_array(adt* t) {
-    frame* f = t->head;
+    node* n = t->head;
 
     if (!t->length)
         return NULL;
@@ -10,8 +10,8 @@ void* to_array(adt* t) {
     int *a = malloc(sizeof(int) * t->length);
 
     for (int i = 0; i < t->length; i++) {
-        a[i] = f->data;
-        f = f->next;
+        a[i] = n->data;
+        n = n->next;
     }
     
     return a;
@@ -21,16 +21,16 @@ char* to_string(adt* t, char* iterable) {
     if (!t->length)
         return NULL;
 
-    frame* f = t->head;
+    node* n = t->head;
     int len = t->length + (strlen(iterable) * t->length);
     int i = 0;
 
     char *s = malloc((sizeof(char)) * len);
     
     while (1) {
-        sprintf(&s[i], "%c", (char) f->data);
+        sprintf(&s[i], "%c", (char) n->data);
         
-        if ((f = f->next) == NULL)
+        if ((n = n->next) == NULL)
             break;
 
         strcat(s, iterable);
@@ -42,8 +42,6 @@ char* to_string(adt* t, char* iterable) {
 }
 
 int peek(adt* t) {
-    check_adt(t, 0, "Can not peek empty structure");
-
     return t->head->data;
 }
 
@@ -56,12 +54,12 @@ int length(adt* t) {
 
 void clear(adt* t) {
     if (t->length) {
-        frame* f = t->head;
+        node* n = t->head;
 
         while (t->head != NULL) {
-            f = f->next;
+            n = n->next;
             free(t->head);
-            t->head = f;
+            t->head = n;
         }
     }
 
@@ -69,11 +67,4 @@ void clear(adt* t) {
 
     free(t);
     t = NULL;
-}
-
-void check_adt(adt* t, int min, char* msg) {
-    if (t == NULL || t->head == NULL || !t->length || t->length < min) {
-        printf("\n%s\n", msg);
-        exit(1);
-    }
 }

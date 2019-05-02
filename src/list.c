@@ -8,15 +8,15 @@ list init_list(void) {
 }
 
 void add(list l, int data) {
-    frame *f = malloc(sizeof(frame));
+    node *n = malloc(sizeof(node));
 
-    f->data = data;
-    f->next = NULL;
+    n->data = data;
+    n->next = NULL;
 
     if (l->tail != NULL)
-        l->tail->next = f;
+        l->tail->next = n;
 
-    l->tail = f;
+    l->tail = n;
     l->length++;
 
     if (l->head == NULL)
@@ -26,84 +26,79 @@ void add(list l, int data) {
 void insert(list l, int index, int data) {
     check_adt(l, index, "Index out of list range");
 
-    frame *f = malloc(sizeof(frame));
-    frame *h = l->head;
+    node *n = malloc(sizeof(node));
+    node *h = l->head;
 
     for (int i = 0; i < index; i++)
         h = h->next;
 
-    f->data = data;
-    f->next = h->next;
-    h->next = f;
+    n->data = data;
+    n->next = h->next;
+    h->next = n;
     l->length++;
 }
 
 int get(list l, int index) {
-    check_adt(l, index, "Index out of list range");
-
-    frame *f = l->head;
+    node *n = l->head;
     
-    for (int i = 0; i < index && f->next != NULL; i++)
-        f = f->next;
+    for (int i = 0; i < index && n->next != NULL; i++)
+        n = n->next;
 
-    return f->data;
+    return n->data;
 }
 
 int set(list l, int index, int data) {
-    check_adt(l, index, "Index out of list range");
-
-    frame *f = l->head;
+    node *n = l->head;
 
     for (int i = 0; i < index; i++)
-        f = f->next;
+        n = n->next;
 
-    f->data = data;
+    n->data = data;
 
     return 1;
 }
 
 int find(list l, int target) {
-    frame *f = l->head;
+    node *n = l->head;
 
     for (int i = 0; i < l->length; i++) {
-        if (f->data == target)
+        if (n->data == target)
             return i;
 
-        f = f->next;
+        n = n->next;
     }
 
     return -1;
 }
 
 int cut(list l, int index) {
-    check_adt(l, index, "Can not cut items from empty list");
-    frame *f, *f2;
+    node *n, *f2;
     int i, data;
 
-    f = l->head;
+    n = l->head;
 
     for (i = 0; (i + 1) < index; i++)
-        f = f->next;
+        n = n->next;
 
     if (l->length == 1) {
-        data = f->data;
-        free(f);
+        data = n->data;
+        free(n);
         l->head = NULL;
 
-    } else if (f == l->head) {
-        data = f->data;
-        l->head = f->next;
-        free(f);
+    } else if (n == l->head) {
+        data = n->data;
+        l->head = n->next;
+        free(n);
 
-    } else if (f == l->tail) {
-        data = (f->next)->data;
-        free(f->next);
-        f->next = NULL;
+    } else if (n == l->tail) {
+        data = (n->next)->data;
+        free(n->next);
+        n->next = NULL;
     } else {
-        data = (f->next)->data;
-        f2 = (f->next)->next;
-        free(f->next);
-        f->next = f2;
+        data = (n->next)->data;
+        f2 = (n->next)->next;
+        free(n->next);
+        n->next = f2;
     }
 
     l->length--;

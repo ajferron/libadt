@@ -5,16 +5,16 @@
 #include <string.h>
 #include <stdio.h>
 
-struct frame {
+struct node {
     int data;
-    struct frame *next;
+    struct node *next;
 };
 
-typedef struct frame frame;
+typedef struct node node;
 
 struct adt {
-    frame *head;
-    frame *tail;
+    node *head;
+    node *tail;
     int length;
 };
 
@@ -38,6 +38,5 @@ void clear(adt *);
  * Que: head = first item added */
 int peek(adt *);
 
-void check_adt(adt*, int min, char* msg);
 
 #endif

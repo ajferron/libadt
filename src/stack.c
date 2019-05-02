@@ -8,23 +8,23 @@ stack init_stack(void) {
 }
 
 void push(stack s, int data) {
-    frame *f = malloc(sizeof(frame));
+    node *n = malloc(sizeof(node));
 
-    f->data = data;
-    f->next = s->head;
-    s->head = f;
+    n->data = data;
+    n->next = s->head;
+    s->head = n;
     s->length++;
 }
 
 int pop(stack s) {
     check_adt(s, 0, "Can not pop items from empty stack");
 
-    frame *f = s->head;
-    s->head = f->next;
+    node *n = s->head;
+    s->head = n->next;
 
-    int data = f->data;
+    int data = n->data;
     s->length--;
-    free(f);
+    free(n);
 
     return data;
 }
