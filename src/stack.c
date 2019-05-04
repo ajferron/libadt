@@ -32,3 +32,7 @@ int pop(stack s) {
 
     return data;
 }
+
+int peek(stack s) {
+    return s->head->data;
+}

@@ -12,4 +12,7 @@ void push(stack, int data);
 /* Remove and return the last integer added */
 int pop(stack);
 
+/* Return the head of the stack (last added) */
+int peek(stack);
+
 #endif
