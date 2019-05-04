@@ -57,7 +57,7 @@ int get(list l, int index) {
     return n->data;
 }
 
-int set(list l, int index, int data) {
+int replace(list l, int index, int data) {
     node *n;
     int i;
     

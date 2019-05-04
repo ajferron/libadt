@@ -18,18 +18,18 @@ struct adt {
     int length;
 };
 
-typedef struct adt adt, *list, *stack, *que;
+typedef struct adt adt, *list, *stack, *que, *set;
 
-// Return a pointer to an array of all integers in the data structure
+/* Return a pointer to an array of all integers in the data structure */
 void* adt_array(adt *);
 
-// Return a pointer to an array of the characters in the data structure seperated by an interable
+/* Return a pointer to an array of the characters in the data structure seperated by an interable */
 char* adt_string(adt *, char *iterable);
 
-// Return the number of items in data structure
+/* Return the number of items in data structure */
 int adt_length(adt *);
 
-// Free all memory allocated to data structure. Use init_list()/init_stack()/init_que() to re-initialize
+/* Free all memory allocated to data structure. Use init_list()/init_stack()/init_que() to re-initialize */
 void adt_clear(adt *);
 
 /* Return the head of the data structure

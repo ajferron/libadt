@@ -89,8 +89,8 @@ int main(void) {
     }
 
     for (i = 0; i < N; i++) {
-        set(lst, i, i + 50);
-        printf("\nset(lst, %d, %d) \t get(%d) = %d \t adt_length(lst) = %d", i, i + 50, i, get(lst, i), adt_length(lst));
+        replace(lst, i, i + 50);
+        printf("\nreplace(lst, %d, %d) \t get(%d) = %d \t adt_length(lst) = %d", i, i + 50, i, get(lst, i), adt_length(lst));
     }
 
     printf("\n");
