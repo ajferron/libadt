@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "adt.h"
 
 void* adt_array(adt* t) {
@@ -43,10 +42,6 @@ char* adt_string(adt* t, char* iterable) {
 
 }
 
-int adt_peek(adt* t) {
-    return t->head->data;
-}
-
 int adt_length(adt* t) {
     if (t != NULL)
         return t->length;
@@ -73,4 +68,8 @@ void adt_clear(adt* t) {
 
     free(t);
     t = NULL;
+}
+
+int adt_empty(adt* t) {
+    return t->length;
 }
