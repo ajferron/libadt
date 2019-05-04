@@ -38,3 +38,11 @@ int deque(que q) {
 
     return data;
 }
+
+int head(que q) {
+    return q->head->data;
+}
+
+int tail(que q) {
+    return q->tail->data;
+}

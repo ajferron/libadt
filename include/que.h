@@ -12,4 +12,10 @@ void enque(que, int data);
 /* Remove and return bottom integer in que */
 int deque(que);
 
+/* Return the integer at the front of the que (first added) */
+int head(que);
+
+/* Return the integer at the end of the que (last added) */
+int tail(que);
+
 #endif
