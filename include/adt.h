@@ -20,23 +20,23 @@ struct adt {
 
 typedef struct adt adt, *list, *stack, *que;
 
-// Return a pointer to an array of all items in data structure
-void* to_array(adt *);
+// Return a pointer to an array of all integers in the data structure
+void* adt_array(adt *);
 
 // Return a pointer to an array of the characters in the data structure seperated by an interable
-char* to_string(adt *, char *iterable);
+char* adt_string(adt *, char *iterable);
 
 // Return the number of items in data structure
-int length(adt *);
+int adt_length(adt *);
 
-// Free data structure and all memory associated. Use List()/Stack()/Que() to re-initialize
-void clear(adt *);
+// Free all memory allocated to data structure. Use init_list()/init_stack()/init_que() to re-initialize
+void adt_clear(adt *);
 
 /* Return the head of the data structure
  * List: head = first item added
  * Stack: head = last item added
  * Que: head = first item added */
-int peek(adt *);
+int adt_peek(adt *);
 
 
 #endif

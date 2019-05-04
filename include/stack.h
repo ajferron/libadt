@@ -3,13 +3,13 @@
 
 #include "adt.h"
 
-// Initialize stack data structure (LIFO).
+// Initialize stack data structure (LIFO)
 stack init_stack(void);
 
-// Add item to the top of stack.
+// Add integer to the top of stack
 void push(stack, int data);
 
-// Remove and return the last item added.
+// Remove and return the last integer added
 int pop(stack);
 
 #endif

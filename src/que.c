@@ -2,14 +2,17 @@
 
 que init_que(void) {
     que q = malloc(sizeof(adt));
-    q->head = q->tail = NULL;
+    q->head = NULL;
+    q->tail = NULL;
     q->length = 0;
+
     return q;
 }
 
 void enque(que q, int data) {
-    node *n = malloc(sizeof(node));
-
+    node *n;
+    
+    n = malloc(sizeof(node));
     n->data = data;
     n->next = NULL;
 
@@ -24,10 +27,12 @@ void enque(que q, int data) {
 }
 
 int deque(que q) {
-    node *n = q->head;
-    q->head = n->next;
+    node *n;
+    int data;
     
-    int data = n->data;
+    n = q->head;
+    q->head = n->next;
+    data = n->data;
     q->length--;
     free(n);
 

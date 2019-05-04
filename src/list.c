@@ -1,14 +1,20 @@
 #include "adt.h"
 
 list init_list(void) {
-    list l = malloc(sizeof(adt));
-    l->head = l->tail = NULL;
+    list l;
+    
+    l = malloc(sizeof(adt));
+    l->head = NULL;
+    l->tail = NULL;
     l->length = 0;
+
     return l;
 }
 
-void add(list l, int data) {
-    node *n = malloc(sizeof(node));
+void append(list l, int data) {
+    node *n;
+
+    n = malloc(sizeof(node));
 
     n->data = data;
     n->next = NULL;
@@ -24,12 +30,13 @@ void add(list l, int data) {
 }
 
 void insert(list l, int index, int data) {
-    check_adt(l, index, "Index out of list range");
+    node *n, *h;
+    int i;
 
-    node *n = malloc(sizeof(node));
-    node *h = l->head;
+    n = malloc(sizeof(node));
+    h = l->head;
 
-    for (int i = 0; i < index; i++)
+    for (i = 0; i < index; i++)
         h = h->next;
 
     n->data = data;
@@ -39,18 +46,27 @@ void insert(list l, int index, int data) {
 }
 
 int get(list l, int index) {
-    node *n = l->head;
+    node *n;
+    int  i;
     
-    for (int i = 0; i < index && n->next != NULL; i++)
+    n = l->head;
+    
+    for (i = 0; i < index && n->next != NULL; i++)
         n = n->next;
 
     return n->data;
 }
 
 int set(list l, int index, int data) {
-    node *n = l->head;
+    node *n;
+    int i;
+    
+    if (l->length < index)
+        return 0;
 
-    for (int i = 0; i < index; i++)
+    n = l->head;
+
+    for (i = 0; i < index; i++)
         n = n->next;
 
     n->data = data;
@@ -59,9 +75,12 @@ int set(list l, int index, int data) {
 }
 
 int find(list l, int target) {
-    node *n = l->head;
+    node *n;
+    int i;
 
-    for (int i = 0; i < l->length; i++) {
+    n = l->head;
+
+    for (i = 0; i < l->length; i++) {
         if (n->data == target)
             return i;
 
@@ -72,7 +91,7 @@ int find(list l, int target) {
 }
 
 int cut(list l, int index) {
-    node *n, *f2;
+    node *n, *n2;
     int i, data;
 
     n = l->head;
@@ -96,9 +115,9 @@ int cut(list l, int index) {
         n->next = NULL;
     } else {
         data = (n->next)->data;
-        f2 = (n->next)->next;
+        n2 = (n->next)->next;
         free(n->next);
-        n->next = f2;
+        n->next = n2;
     }
 
     l->length--;
