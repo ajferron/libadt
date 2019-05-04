@@ -24,4 +24,7 @@ int replace(list, int index, int data);
 /* Remove a index and return it's value */
 int cut(list, int);
 
+/* Return the number of integers in the list if it is initialized and -1 otherwise  */
+int length(list);
+
 #endif

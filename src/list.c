@@ -124,3 +124,10 @@ int cut(list l, int index) {
 
     return data;
 }
+
+int length(list lst) {
+    if (lst != NULL)
+        return lst->length;
+
+    return -1;
+}
