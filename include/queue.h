@@ -1,5 +1,5 @@
-#ifndef _QUE_H_
-#define _QUE_H_
+#ifndef _QUEUE_H_
+#define _QUEUE_H_
 
 #include "adt.h"
 
@@ -7,15 +7,15 @@
 que init_que(void);
 
 /* Add integer to top of que */
-void enque(que, int data);
+void enqueue(que, int data);
 
 /* Remove and return bottom integer in que */
-int deque(que);
+int dequeue(que);
 
 /* Return the integer at the front of the que (first added) */
-int head(que);
+int queue_head(que);
 
 /* Return the integer at the end of the que (last added) */
-int tail(que);
+int queue_tail(que);
 
 #endif

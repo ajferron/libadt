@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include "list.h"
 #include "stack.h"
-#include "que.h"
+#include "queue.h"
 
-#define TEST_STACK 1
-#define TEST_QUE 1
 #define TEST_LIST 1
+#define TEST_STACK 1
+#define TEST_QUEUE 1
+#define TEST_SET 1
 #define N 10
 #define C 'j'
 
@@ -14,12 +15,12 @@
 int main(void) {
     list lst;
     stack stk;
-    que q;
+    queue q;
     int i, j;
 
     lst = init_list();
     stk = init_stack();
-    q = init_que();
+    q = init_queue();
 
 
 #if TEST_STACK
@@ -48,15 +49,15 @@ int main(void) {
 #endif
 
 
-#if TEST_QUE
+#if TEST_QUEUE
 
     int c, *q_arr;
     char *q_str;
 
-    printf("\n------------------------| TEST QUE |-------------------------\n\n");
+    printf("\n------------------------| TEST QUEUE |-------------------------\n\n");
 
     for (c = 'a'; c < C; c++)
-        enque(q, c);
+        enqueue(q, c);
 
     q_arr = adt_array(q);
 
@@ -67,7 +68,7 @@ int main(void) {
     printf("\n%s\n", q_str);
 
     while (!adt_empty(q))
-        printf("%c ", deque(q));
+        printf("%c ", dequeue(q));
 
     printf("\n");
 

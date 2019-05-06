@@ -1,6 +1,6 @@
 #include "adt.h"
 
-que init_que(void) {
+que init_queue(void) {
     que q = malloc(sizeof(adt));
     q->head = NULL;
     q->tail = NULL;
@@ -9,7 +9,7 @@ que init_que(void) {
     return q;
 }
 
-void enque(que q, int data) {
+void enqueue(que q, int data) {
     node *n;
     
     n = malloc(sizeof(node));
@@ -26,7 +26,7 @@ void enque(que q, int data) {
         q->head = q->tail;
 }
 
-int deque(que q) {
+int dequeue(que q) {
     node *n;
     int data;
     
@@ -39,10 +39,10 @@ int deque(que q) {
     return data;
 }
 
-int head(que q) {
+int queue_head(que q) {
     return q->head->data;
 }
 
-int tail(que q) {
+int queue_tail(que q) {
     return q->tail->data;
 }
