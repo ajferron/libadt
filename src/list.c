@@ -11,7 +11,7 @@ list init_list(void) {
     return l;
 }
 
-void append(list l, int data) {
+void list_append(list l, int data) {
     node *n;
 
     n = malloc(sizeof(node));
@@ -29,7 +29,7 @@ void append(list l, int data) {
         l->head = l->tail;
 }
 
-void insert(list l, int index, int data) {
+void list_insert(list l, int index, int data) {
     node *n, *h;
     int i;
 
@@ -45,7 +45,7 @@ void insert(list l, int index, int data) {
     l->length++;
 }
 
-int get(list l, int index) {
+int list_get(list l, int index) {
     node *n;
     int  i;
     
@@ -57,7 +57,7 @@ int get(list l, int index) {
     return n->data;
 }
 
-int replace(list l, int index, int data) {
+int list_replace(list l, int index, int data) {
     node *n;
     int i;
     
@@ -74,7 +74,7 @@ int replace(list l, int index, int data) {
     return 1;
 }
 
-int find(list l, int target) {
+int list_find(list l, int target) {
     node *n;
     int i;
 
@@ -90,8 +90,8 @@ int find(list l, int target) {
     return -1;
 }
 
-int cut(list l, int index) {
-    node *n, *n2;
+int list_cut(list l, int index) {
+    node *n, *n1;
     int i, data;
 
     n = l->head;
@@ -115,9 +115,9 @@ int cut(list l, int index) {
         n->next = NULL;
     } else {
         data = (n->next)->data;
-        n2 = (n->next)->next;
+        n1 = (n->next)->next;
         free(n->next);
-        n->next = n2;
+        n->next = n1;
     }
 
     l->length--;
@@ -125,7 +125,7 @@ int cut(list l, int index) {
     return data;
 }
 
-int length(list lst) {
+int list_len(list lst) {
     if (lst != NULL)
         return lst->length;
 

@@ -55,7 +55,7 @@ int main(void) {
 
     printf("\n------------------------| TEST QUE |-------------------------\n\n");
 
-    for (c = 'a'; adt_length(q) < N; c++)
+    for (c = 'a'; c < C; c++)
         enque(q, c);
 
     q_arr = adt_array(q);
@@ -63,10 +63,10 @@ int main(void) {
     for (i = 0; i < N; i++)
         printf("%c ", q_arr[i]);
 
-    q_str = adt_string(q, ", ");
+    q_str = adt_string(q, ", ", 2);
     printf("\n%s\n", q_str);
 
-    while (adt_length(q))
+    while (!adt_empty(q))
         printf("%c ", deque(q));
 
     printf("\n");
@@ -85,28 +85,28 @@ int main(void) {
 
     for (i = 0; i < N; i++){
         printf("%c ", i);
-        append(lst, i);
+        list_append(lst, i);
     }
 
     for (i = 0; i < N; i++) {
-        replace(lst, i, i + 50);
-        printf("\nreplace(lst, %d, %d) \t get(%d) = %d \t adt_length(lst) = %d", i, i + 50, i, get(lst, i), adt_length(lst));
+        list_replace(lst, i, i + 50);
+        printf("\nlist_replace(lst, %d, %d) \t list_get(%d) = %d \t list_len(lst) = %d", i, i + 50, i, list_get(lst, i), list_len(lst));
     }
 
     printf("\n");
 
     for (i = 0; i < N; i++)
-        printf("\nfind(lst, %d) = %d", i + 50, find(lst, i + 50));
+        printf("\nlist_find(lst, %d) = %d", i + 50, list_find(lst, i + 50));
 
     printf("\n");
 
     for (i = 0; i < N*2; i+=2) {
-        insert(lst, i, i + 1);
-        printf("\ninsert(lst, %d, %d) \t get(%d + 1) = %d \t adt_length(lst) = %d\n", i, i + 1, i, get(lst, i + 1), adt_length(lst));
+        list_insert(lst, i, i + 1);
+        printf("\nlist_insert(lst, %d, %d) \t list_get(%d + 1) = %d \t list_lstlen(lst) = %d\n", i, i + 1, i, list_get(lst, i + 1), list_len(lst));
 
         l_arr = adt_array(lst);
 
-        for (j = 0; j < adt_length(lst); j++)
+        for (j = 0; j < list_len(lst); j++)
             printf("%d ", l_arr[j]);
 
         printf("\n");
@@ -114,8 +114,8 @@ int main(void) {
         free(l_arr);
     }
 
-    while(adt_length(lst))
-        printf("\ncut(lst, %d) = %d \t adt_length(lst) = %d", 0, cut(lst, 0), adt_length(lst));
+    while(list_len(lst))
+        printf("\nlist_cut(lst, %d) = %d \t list_len(lst) = %d", 0, list_cut(lst, 0), list_len(lst));
 
     printf("\n\n");
 
