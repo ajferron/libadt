@@ -1,6 +1,6 @@
 #include "adt.h"
 
-void* adt_array(adt* t) {
+void* adt_array(adt *t) {
     node *n;
     int *a, i;
 
@@ -19,7 +19,7 @@ void* adt_array(adt* t) {
     return a;
 }
 
-char* adt_string(adt* t, char* iterable) {
+char* adt_string(adt *t, char* iterable, size_t iter_len) {
     node *n;
     int len, i;
     char *s;
@@ -27,29 +27,23 @@ char* adt_string(adt* t, char* iterable) {
     if (!t->length)
         return NULL;
 
-    n = t->head;
-    len = t->length + (strlen(iterable) * t->length);
-    i = 0;
-
+    len = t->length + (iter_len * t->length);
     s = malloc((sizeof(char)) * len);
+    n = t->head;
 
-    for (i = 0; (n = n->next) != NULL; i += strlen(iterable) + 1) {
+    for (i = 0; i < len; i += iter_len + 1) {
         sprintf(&s[i], "%c", (char) n->data);
-        strcat(s, iterable);
+
+        if (i + iter_len + 1 < len)
+            strcat(s, iterable);
+
+        n = n->next;
     }
 
     return s;
-
 }
 
-int adt_length(adt* t) {
-    if (t != NULL)
-        return t->length;
-    
-    return -1;
-}
-
-void adt_clear(adt* t) {
+void adt_clear(adt *t) {
     node *n;
 
     if (t->length) {
@@ -67,9 +61,11 @@ void adt_clear(adt* t) {
     }
 
     free(t);
-    t = NULL;
 }
 
 int adt_empty(adt* t) {
-    return t->length;
+    if (t->length)
+        return 0;
+
+    return 1;
 }

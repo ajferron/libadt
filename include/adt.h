@@ -18,13 +18,13 @@ struct adt {
     int length;
 };
 
-typedef struct adt adt, *list, *stack, *que, *set;
+typedef struct adt adt, *list, *stack, *queue, *set;
 
 /* Return a pointer to an array of all integers in the data structure */
 void* adt_array(adt *);
 
 /* Return a pointer to an array of the characters in the data structure seperated by an interable */
-char* adt_string(adt *, char *iterable);
+char* adt_string(adt *, char *iterable, size_t iter_len);
 
 /* Return 1 if the adt has no nodes and 0 otherwise */
 int adt_empty(adt *);
