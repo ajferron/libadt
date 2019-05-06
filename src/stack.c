@@ -10,7 +10,7 @@ stack init_stack(void) {
     return s;
 }
 
-void push(stack s, int data) {
+void stack_push(stack s, int data) {
     node *n;
     
     n = malloc(sizeof(node));
@@ -20,7 +20,7 @@ void push(stack s, int data) {
     s->length++;
 }
 
-int pop(stack s) {
+int stack_pop(stack s) {
     node *n;
     int data;
 
@@ -33,6 +33,6 @@ int pop(stack s) {
     return data;
 }
 
-int peek(stack s) {
+int stack_peek(stack s) {
     return s->head->data;
 }

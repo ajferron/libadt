@@ -1,7 +1,7 @@
 #include "adt.h"
 
-que init_queue(void) {
-    que q = malloc(sizeof(adt));
+queue init_queue(void) {
+    queue q = malloc(sizeof(adt));
     q->head = NULL;
     q->tail = NULL;
     q->length = 0;
@@ -9,7 +9,7 @@ que init_queue(void) {
     return q;
 }
 
-void enqueue(que q, int data) {
+void enqueue(queue q, int data) {
     node *n;
     
     n = malloc(sizeof(node));
@@ -26,7 +26,7 @@ void enqueue(que q, int data) {
         q->head = q->tail;
 }
 
-int dequeue(que q) {
+int dequeue(queue q) {
     node *n;
     int data;
     
@@ -39,10 +39,10 @@ int dequeue(que q) {
     return data;
 }
 
-int queue_head(que q) {
+int queue_head(queue q) {
     return q->head->data;
 }
 
-int queue_tail(que q) {
+int queue_tail(queue q) {
     return q->tail->data;
 }

@@ -7,12 +7,12 @@
 stack init_stack(void);
 
 /* Add integer to the top of stack */
-void push(stack, int data);
+void stack_push(stack, int data);
 
 /* Remove and return the last integer added */
-int pop(stack);
+int stack_pop(stack);
 
 /* Return the head of the stack (last added) */
-int peek(stack);
+int stack_peek(stack);
 
 #endif

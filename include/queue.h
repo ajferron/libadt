@@ -4,18 +4,18 @@
 #include "adt.h"
 
 /* Initialize que data structure (FIFO) */
-que init_que(void);
+queue init_queue(void);
 
 /* Add integer to top of que */
-void enqueue(que, int data);
+void enqueue(queue, int data);
 
 /* Remove and return bottom integer in que */
-int dequeue(que);
+int dequeue(queue);
 
 /* Return the integer at the front of the que (first added) */
-int queue_head(que);
+int queue_head(queue);
 
 /* Return the integer at the end of the que (last added) */
-int queue_tail(que);
+int queue_tail(queue);
 
 #endif

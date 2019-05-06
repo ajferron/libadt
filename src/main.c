@@ -30,7 +30,7 @@ int main(void) {
     printf("\n-----------------------| TEST STACK |------------------------\n\n");
 
     for (i = 0; i < N; i++) 
-        push(stk, i);
+        stack_push(stk, i);
 
     s_arr = adt_array(stk) ;
 
@@ -40,7 +40,7 @@ int main(void) {
     printf("\n");
 
     for (i = 0; i < N; i++)
-        printf("%d ", pop(stk));
+        printf("%d ", stack_pop(stk));
 
     printf("\n");
 
