@@ -57,12 +57,9 @@ int list_get(list l, int index) {
     return n->data;
 }
 
-int list_replace(list l, int index, int data) {
+void list_replace(list l, int index, int data) {
     node *n;
     int i;
-    
-    if (l->length < index)
-        return 0;
 
     n = l->head;
 
@@ -70,8 +67,6 @@ int list_replace(list l, int index, int data) {
         n = n->next;
 
     n->data = data;
-
-    return 1;
 }
 
 int list_find(list l, int target) {
