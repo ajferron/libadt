@@ -27,6 +27,12 @@ int list_cut(list, int);
 /* Return the number of integers in the list if it is initialized and -1 otherwise  */
 int list_len(list);
 
+/* Return a pointer to an array of all integers in the data structure */
+void* list_array(list);
+
+/* Return a pointer to an array of the characters in the data structure seperated by an interable */
+char* list_string(list, char *iterable, size_t iter_len);
+
 /* Free all memory allocated to the data structure */
 void free_list(list);
 

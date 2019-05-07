@@ -128,6 +128,49 @@ int list_len(list lst) {
     return -1;
 }
 
+void* list_array(list l) {
+    node *n;
+    int *a, i;
+
+    if (!l->length)
+        return NULL;
+
+    n = l->head;
+
+    a = malloc(sizeof(int) * l->length);
+
+    for (i = 0; i < l->length; i++) {
+        a[i] = n->data;
+        n = n->next;
+    }
+    
+    return a;
+}
+
+char* list_string(list l, char* iterable, size_t iter_len) {
+    node *n;
+    int len, i;
+    char *s;
+    
+    if (!l->length)
+        return NULL;
+
+    len = l->length + (iter_len * l->length);
+    s = malloc((sizeof(char)) * len);
+    n = l->head;
+
+    for (i = 0; i < len; i += iter_len + 1) {
+        sprintf(&s[i], "%c", (char) n->data);
+
+        if (i + iter_len + 1 < len)
+            strcat(s, iterable);
+
+        n = n->next;
+    }
+
+    return s;
+}
+
 void free_list(list l) {
     node *n;
 

@@ -20,10 +20,5 @@ struct adt {
 
 typedef struct adt adt, *list, *stack, *queue, *set;
 
-/* Return a pointer to an array of all integers in the data structure */
-void* adt_array(adt *);
-
-/* Return a pointer to an array of the characters in the data structure seperated by an interable */
-char* adt_string(adt *, char *iterable, size_t iter_len);
 
 #endif
