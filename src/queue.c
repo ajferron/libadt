@@ -46,3 +46,23 @@ int queue_head(queue q) {
 int queue_tail(queue q) {
     return q->tail->data;
 }
+
+void free_queue(queue q) {
+    node *n;
+
+    if (q->length) {
+        n = q->head;
+
+        while (q->head != NULL) {
+            n = n->next;
+            free(q->head);
+            q->head = n;
+        }
+
+        q->head = NULL;
+        q->tail = NULL;
+        q->length = 0;
+    }
+
+    free(q);
+}

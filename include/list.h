@@ -27,4 +27,7 @@ int list_cut(list, int);
 /* Return the number of integers in the list if it is initialized and -1 otherwise  */
 int list_len(list);
 
+/* Free all memory allocated to the data structure */
+void free_list(list);
+
 #endif

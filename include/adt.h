@@ -29,7 +29,4 @@ char* adt_string(adt *, char *iterable, size_t iter_len);
 /* Return 1 if the adt has no nodes and 0 otherwise */
 int adt_empty(adt *);
 
-/* Free all memory allocated to data structure. Use init_list()/init_stack()/init_que() to re-initialize */
-void adt_clear(adt *);
-
 #endif

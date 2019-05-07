@@ -36,3 +36,23 @@ int stack_pop(stack s) {
 int stack_peek(stack s) {
     return s->head->data;
 }
+
+void free_stack(stack s) {
+    node *n;
+
+    if (s->length) {
+        n = s->head;
+
+        while (s->head != NULL) {
+            n = n->next;
+            free(s->head);
+            s->head = n;
+        }
+
+        s->head = NULL;
+        s->tail = NULL;
+        s->length = 0;
+    }
+
+    free(s);
+}

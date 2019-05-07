@@ -23,10 +23,11 @@ void list_append(list l, int data) {
         l->tail->next = n;
 
     l->tail = n;
-    l->length++;
-
+        
     if (l->head == NULL)
         l->head = l->tail;
+
+    l->length++;
 }
 
 void list_insert(list l, int index, int data) {
@@ -125,4 +126,24 @@ int list_len(list lst) {
         return lst->length;
 
     return -1;
+}
+
+void free_list(list l) {
+    node *n;
+
+    if (l->length) {
+        n = l->head;
+
+        while (l->head != NULL) {
+            n = n->next;
+            free(l->head);
+            l->head = n;
+        }
+
+        l->head = NULL;
+        l->tail = NULL;
+        l->length = 0;
+    }
+
+    free(l);
 }

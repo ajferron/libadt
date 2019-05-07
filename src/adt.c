@@ -43,26 +43,6 @@ char* adt_string(adt *t, char* iterable, size_t iter_len) {
     return s;
 }
 
-void adt_clear(adt *t) {
-    node *n;
-
-    if (t->length) {
-        n = t->head;
-
-        while (t->head != NULL) {
-            n = n->next;
-            free(t->head);
-            t->head = n;
-        }
-
-        t->head = NULL;
-        t->tail = NULL;
-        t->length = 0;
-    }
-
-    free(t);
-}
-
 int adt_empty(adt* t) {
     if (t->length)
         return 0;

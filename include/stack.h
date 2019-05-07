@@ -15,4 +15,7 @@ int stack_pop(stack);
 /* Return the head of the stack (last added) */
 int stack_peek(stack);
 
+/* Free all memory allocated to the data structure */
+void free_stack(stack);
+
 #endif
