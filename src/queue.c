@@ -47,6 +47,13 @@ int queue_tail(queue q) {
     return q->tail->data;
 }
 
+int queue_empty(queue q) {
+    if (q->length)
+        return 0;
+
+    return 1;
+}
+
 void free_queue(queue q) {
     node *n;
 

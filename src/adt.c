@@ -42,10 +42,3 @@ char* adt_string(adt *t, char* iterable, size_t iter_len) {
 
     return s;
 }
-
-int adt_empty(adt* t) {
-    if (t->length)
-        return 0;
-
-    return 1;
-}

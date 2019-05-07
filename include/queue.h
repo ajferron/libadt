@@ -18,8 +18,8 @@ int queue_head(queue);
 /* Return the integer at the end of the que (last added) */
 int queue_tail(queue);
 
-/* Free all memory allocated to the data structure */
-void free_set(set);
+/* Return 1 if the queue is empty and 0 otherwise */
+int queue_empty(queue);
 
 /* Free all memory allocated to the data structure */
 void free_queue(queue);

@@ -37,6 +37,13 @@ int stack_peek(stack s) {
     return s->head->data;
 }
 
+int stack_empty(stack s) {
+    if (s->length)
+        return 0;
+
+    return 1;
+}
+
 void free_stack(stack s) {
     node *n;
 
