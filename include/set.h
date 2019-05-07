@@ -20,7 +20,7 @@ typedef struct set *set;
 
 
 /* Initialize the set data structure */
-set init_set(void);
+set create_set(void);
 
 /* Add an integer to set */
 void set_add(set, int data);

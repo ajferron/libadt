@@ -1,6 +1,6 @@
 #include "list.h"
 
-list init_list(void) {
+list create_list(void) {
     list l;
     
     l = malloc(sizeof(list));

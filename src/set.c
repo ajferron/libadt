@@ -3,7 +3,7 @@
 #include "set.h"
 #include "math.h"
 
-set init_set(void) {
+set create_set(void) {
     set s;
 
     s = malloc(sizeof(set));
@@ -67,8 +67,8 @@ set set_union(set s1, set s2) {
     set s1_cpy, s2_cpy;
     element *e;
 
-    s1_cpy = init_set();
-    s2_cpy = init_set();
+    s1_cpy = create_set();
+    s2_cpy = create_set();
 
     for (e = s1->head; e != NULL; e = e->next)
         set_add(s1_cpy, e->data);
@@ -92,9 +92,9 @@ set set_intersection(set s1, set s2) {
     element *e1, *e2;
 
     if (s1 == NULL || s2 == NULL)
-        return init_set();
+        return create_set();
         
-    s_new = init_set();
+    s_new = create_set();
 
     for (e1 = s1->head; e1 != NULL; e1 = e1->next)
         for (e2 = s2->head; e2 != NULL; e2 = e2->next)
@@ -108,7 +108,7 @@ set interval(int a, int b) {
     set s;
     int i;
 
-    s = init_set();
+    s = create_set();
 
     for (i = a; i <= b; i++)
         set_add(s, i);

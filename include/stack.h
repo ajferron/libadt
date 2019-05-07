@@ -2,6 +2,7 @@
 #define _STACK_H_
 
 #include <stdlib.h>
+
 struct frame {
     int data;
     struct frame *next;
@@ -16,7 +17,7 @@ struct stack {
 typedef struct stack *stack;
 
 /* Initialize stack data structure (LIFO) */
-stack init_stack(void);
+stack create_stack(void);
 
 /* Add integer to the top of stack */
 void stack_push(stack, int data);

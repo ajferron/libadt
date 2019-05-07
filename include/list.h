@@ -21,7 +21,7 @@ struct list {
 typedef struct list *list;
 
 /* Initialize list data structure */
-list init_list(void);
+list create_list(void);
 
 /* Add item to end of list */
 void list_append(list, int data);

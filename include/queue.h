@@ -18,7 +18,7 @@ struct queue {
 typedef struct queue *queue;
 
 /* Initialize que data structure (FIFO) */
-queue init_queue(void);
+queue create_queue(void);
 
 /* Add integer to top of que */
 void enqueue(queue, int data);

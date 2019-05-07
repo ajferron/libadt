@@ -1,6 +1,6 @@
 #include "stack.h"
 
-stack init_stack(void) {
+stack create_stack(void) {
     stack s;
     
     s = malloc(sizeof(stack));
