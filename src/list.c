@@ -1,11 +1,11 @@
-#include "adt.h"
+#include "list.h"
 
 list init_list(void) {
     list l;
     
-    l = malloc(sizeof(adt));
-    l->head = NULL;
-    l->tail = NULL;
+    l = malloc(sizeof(list));
+    l->front = NULL;
+    l->end = NULL;
     l->length = 0;
 
     return l;
@@ -19,13 +19,13 @@ void list_append(list l, int data) {
     n->data = data;
     n->next = NULL;
 
-    if (l->tail != NULL)
-        l->tail->next = n;
+    if (l->end != NULL)
+        l->end->next = n;
 
-    l->tail = n;
+    l->end = n;
         
-    if (l->head == NULL)
-        l->head = l->tail;
+    if (l->front == NULL)
+        l->front = l->end;
 
     l->length++;
 }
@@ -35,7 +35,7 @@ void list_insert(list l, int index, int data) {
     int i;
 
     n = malloc(sizeof(node));
-    h = l->head;
+    h = l->front;
 
     for (i = 0; i < index; i++)
         h = h->next;
@@ -50,7 +50,7 @@ int list_get(list l, int index) {
     node *n;
     int  i;
     
-    n = l->head;
+    n = l->front;
     
     for (i = 0; i < index && n->next != NULL; i++)
         n = n->next;
@@ -62,7 +62,7 @@ void list_replace(list l, int index, int data) {
     node *n;
     int i;
 
-    n = l->head;
+    n = l->front;
 
     for (i = 0; i < index; i++)
         n = n->next;
@@ -74,7 +74,7 @@ int list_find(list l, int target) {
     node *n;
     int i;
 
-    n = l->head;
+    n = l->front;
 
     for (i = 0; i < l->length; i++) {
         if (n->data == target)
@@ -90,7 +90,7 @@ int list_cut(list l, int index) {
     node *n, *n1;
     int i, data;
 
-    n = l->head;
+    n = l->front;
 
     for (i = 0; (i + 1) < index; i++)
         n = n->next;
@@ -98,14 +98,14 @@ int list_cut(list l, int index) {
     if (l->length == 1) {
         data = n->data;
         free(n);
-        l->head = NULL;
+        l->front = NULL;
 
-    } else if (n == l->head) {
+    } else if (n == l->front) {
         data = n->data;
-        l->head = n->next;
+        l->front = n->next;
         free(n);
 
-    } else if (n == l->tail) {
+    } else if (n == l->end) {
         data = (n->next)->data;
         free(n->next);
         n->next = NULL;
@@ -135,7 +135,7 @@ void* list_array(list l) {
     if (!l->length)
         return NULL;
 
-    n = l->head;
+    n = l->front;
 
     a = malloc(sizeof(int) * l->length);
 
@@ -157,7 +157,7 @@ char* list_string(list l, char* iterable, size_t iter_len) {
 
     len = l->length + (iter_len * l->length);
     s = malloc((sizeof(char)) * len);
-    n = l->head;
+    n = l->front;
 
     for (i = 0; i < len; i += iter_len + 1) {
         sprintf(&s[i], "%c", (char) n->data);
@@ -175,16 +175,16 @@ void free_list(list l) {
     node *n;
 
     if (l->length) {
-        n = l->head;
+        n = l->front;
 
-        while (l->head != NULL) {
+        while (l->front != NULL) {
             n = n->next;
-            free(l->head);
-            l->head = n;
+            free(l->front);
+            l->front = n;
         }
 
-        l->head = NULL;
-        l->tail = NULL;
+        l->front = NULL;
+        l->end = NULL;
         l->length = 0;
     }
 

@@ -1,40 +1,37 @@
-#include "adt.h"
+#include "queue.h"
 
 queue init_queue(void) {
-    queue q = malloc(sizeof(adt));
+    queue q = malloc(sizeof(queue));
     q->head = NULL;
     q->tail = NULL;
-    q->length = 0;
 
     return q;
 }
 
 void enqueue(queue q, int data) {
-    node *n;
+    frame *f;
     
-    n = malloc(sizeof(node));
-    n->data = data;
-    n->next = NULL;
+    f = malloc(sizeof(frame));
+    f->data = data;
+    f->next = NULL;
 
     if (q->tail != NULL)
-        q->tail->next = n;
+        q->tail->next = f;
 
-    q->tail = n;
-    q->length++;
+    q->tail = f;
 
     if (q->head == NULL)
         q->head = q->tail;
 }
 
 int dequeue(queue q) {
-    node *n;
+    frame *f;
     int data;
     
-    n = q->head;
-    q->head = n->next;
-    data = n->data;
-    q->length--;
-    free(n);
+    f = q->head;
+    q->head = f->next;
+    data = f->data;
+    free(f);
 
     return data;
 }
@@ -48,27 +45,26 @@ int queue_tail(queue q) {
 }
 
 int queue_empty(queue q) {
-    if (q->length)
-        return 0;
+    if (q->head == NULL)
+        return 1;
 
-    return 1;
+    return 0;
 }
 
 void free_queue(queue q) {
-    node *n;
+    frame *f;
 
-    if (q->length) {
-        n = q->head;
+    if (q->head != NULL) {
+        f = q->head;
 
         while (q->head != NULL) {
-            n = n->next;
+            f = f->next;
             free(q->head);
-            q->head = n;
+            q->head = f;
         }
 
         q->head = NULL;
         q->tail = NULL;
-        q->length = 0;
     }
 
     free(q);

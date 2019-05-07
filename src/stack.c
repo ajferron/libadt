@@ -1,33 +1,30 @@
-#include "adt.h"
+#include "stack.h"
 
 stack init_stack(void) {
     stack s;
     
-    s = malloc(sizeof(adt));
-    s->head = s->tail = NULL;
-    s->length = 0;
+    s = malloc(sizeof(stack));
+    s->head = NULL;
 
     return s;
 }
 
 void stack_push(stack s, int data) {
-    node *n;
+    frame *n;
     
-    n = malloc(sizeof(node));
+    n = malloc(sizeof(frame));
     n->data = data;
     n->next = s->head;
     s->head = n;
-    s->length++;
 }
 
 int stack_pop(stack s) {
-    node *n;
+    frame *n;
     int data;
 
     n = s->head;
     s->head = n->next;
     data = n->data;
-    s->length--;
     free(n);
 
     return data;
@@ -38,16 +35,16 @@ int stack_peek(stack s) {
 }
 
 int stack_empty(stack s) {
-    if (s->length)
-        return 0;
+    if (s->head == NULL)
+        return 1;
 
-    return 1;
+    return 0;
 }
 
 void free_stack(stack s) {
-    node *n;
+    frame *n;
 
-    if (s->length) {
+    if (s->head != NULL) {
         n = s->head;
 
         while (s->head != NULL) {
@@ -57,8 +54,6 @@ void free_stack(stack s) {
         }
 
         s->head = NULL;
-        s->tail = NULL;
-        s->length = 0;
     }
 
     free(s);

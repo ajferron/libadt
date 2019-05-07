@@ -1,7 +1,21 @@
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
 
-#include "adt.h"
+#include <stdlib.h>
+
+struct frame {
+    int data;
+    struct frame *next;
+};
+
+typedef struct frame frame;
+
+struct queue {
+    frame *head;
+    frame *tail;
+};
+
+typedef struct queue *queue;
 
 /* Initialize que data structure (FIFO) */
 queue init_queue(void);

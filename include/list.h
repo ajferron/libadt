@@ -1,7 +1,24 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
-#include "adt.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+typedef struct node node;
+
+struct list {
+    node *front;
+    node *end;
+    int length;
+};
+
+typedef struct list *list;
 
 /* Initialize list data structure */
 list init_list(void);
@@ -19,7 +36,7 @@ int list_get(list, int index);
 int list_find(list, int data);
 
 /* Set the value of an index */
-int list_replace(list, int index, int data);
+void list_replace(list, int index, int data);
 
 /* Remove a index and return it's value */
 int list_cut(list, int);

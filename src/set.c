@@ -1,10 +1,12 @@
-#include "adt.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include "set.h"
 #include "math.h"
 
 set init_set(void) {
     set s;
 
-    s = malloc(sizeof(adt));
+    s = malloc(sizeof(set));
     s->head = NULL;
     s->tail = NULL;
     s->length = 0;
@@ -13,17 +15,17 @@ set init_set(void) {
 }
 
 void set_add(set s, int data) {
-    node *n;
+    element *e;
 
-    n = malloc(sizeof(node));
+    e = malloc(sizeof(element));
 
-    n->data = data;
-    n->next = NULL;
+    e->data = data;
+    e->next = NULL;
 
     if (s->tail != NULL)
-        s->tail->next = n;
+        s->tail->next = e;
         
-    s->tail = n;
+    s->tail = e;
         
     if (s->head == NULL)
         s->head = s->tail;
@@ -32,29 +34,29 @@ void set_add(set s, int data) {
 }
 
 void remove_element(set s, int value) {
-    node *n, *n1;
+    element *e, *e1;
 
     if (!s->length)
         return;
 
-    for (n = s->head; n->next != NULL; n = n->next)
-        if (n->data == value) {
+    for (e = s->head; e->next != NULL; e = e->next)
+        if (e->data == value) {
             if (s->length == 1) {
                 s->head = NULL;
-                free(n);
+                free(e);
 
-            } else if (n == s->head) {
-                s->head = n->next;
-                free(n);
+            } else if (e == s->head) {
+                s->head = e->next;
+                free(e);
 
-            } else if (n == s->tail) {
-                free(n->next);
-                n->next = NULL;
+            } else if (e == s->tail) {
+                free(e->next);
+                e->next = NULL;
 
             } else {
-                n1 = (n->next)->next;
-                free(n->next);
-                n->next = n1;
+                e1 = (e->next)->next;
+                free(e->next);
+                e->next = e1;
             }
 
              s->length--;
@@ -63,16 +65,16 @@ void remove_element(set s, int value) {
 
 set set_union(set s1, set s2) {
     set s1_cpy, s2_cpy;
-    node *n;
+    element *e;
 
     s1_cpy = init_set();
     s2_cpy = init_set();
 
-    for (n = s1->head; n != NULL; n = n->next)
-        set_add(s1_cpy, n->data);
+    for (e = s1->head; e != NULL; e = e->next)
+        set_add(s1_cpy, e->data);
 
-    for (n = s2->head; n != NULL; n = n->next)
-        set_add(s2_cpy, n->data);
+    for (e = s2->head; e != NULL; e = e->next)
+        set_add(s2_cpy, e->data);
 
     if (s2 == NULL)
         return s1_cpy;
@@ -87,17 +89,17 @@ set set_union(set s1, set s2) {
 
 set set_intersection(set s1, set s2) {
     set s_new;
-    node *n1, *n2;
+    element *e1, *e2;
 
     if (s1 == NULL || s2 == NULL)
         return init_set();
         
     s_new = init_set();
 
-    for (n1 = s1->head; n1 != NULL; n1 = n1->next)
-        for (n2 = s2->head; n2 != NULL; n2 = n2->next)
-            if (n1->data == n2->data)
-                set_add(s_new, n1->data);
+    for (e1 = s1->head; e1 != NULL; e1 = e1->next)
+        for (e2 = s2->head; e2 != NULL; e2 = e2->next)
+            if (e1->data == e2->data)
+                set_add(s_new, e1->data);
 
     return s_new;
 }
@@ -119,32 +121,32 @@ int cardinality(set s) {
 }
 
 int set_contains(set s, int value) {
-    node *n;
+    element *e;
 
     if (!s->length)
         return 0;
 
-    n = s->head;
+    e = s->head;
 
-     for (n = s->head; n != NULL; n = n->next) 
-        if (n->data == value)
+     for (e = s->head; e != NULL; e = e->next) 
+        if (e->data == value)
             return 1;
 
     return 0;
 }
 
 int equivalent(set s1, set s2) {
-    node *n1, *n2;
+    element *e1, *e2;
     
     if (s1->length != s2->length)
         return 0;
 
-    for (n1 = s1->head; n1 != NULL; n1 = n1->next) {
-        for (n2 = s2->head; n2 != NULL; n2 = n2->next)
-            if (n1->data == n2->data)
+    for (e1 = s1->head; e1 != NULL; e1 = e1->next) {
+        for (e2 = s2->head; e2 != NULL; e2 = e2->next)
+            if (e1->data == e2->data)
                 break;
 
-        if (n2 == NULL)
+        if (e2 == NULL)
             return 0;
     }
 
@@ -152,15 +154,15 @@ int equivalent(set s1, set s2) {
 }
 
 void free_set(set s) {
-    node *n;
+    element *e;
 
     if (s->length) {
-        n = s->head;
+        e = s->head;
 
         while (s->head != NULL) {
-            n = n->next;
+            e = e->next;
             free(s->head);
-            s->head = n;
+            s->head = e;
         }
 
         s->head = NULL;

@@ -1,9 +1,23 @@
 #ifndef _SET_H_
 #define _SET_H_
 
-#include "adt.h"
-
 #define EMPTY_SET NULL
+
+struct element {
+    int data;
+    struct element *next;
+};
+
+typedef struct element element;
+
+struct set {
+    element *head;
+    element *tail;
+    int length;
+};
+
+typedef struct set *set;
+
 
 /* Initialize the set data structure */
 set init_set(void);
