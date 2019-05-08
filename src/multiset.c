@@ -1,12 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "set.h"
-#include "math.h"
+#include "multiset.h"
 
-set create_set(void) {
-    set s;
+multiset create_mset(void) {
+    multiset s;
 
-    s = malloc(sizeof(set));
+    s = malloc(sizeof(multiset));
     s->head = NULL;
     s->tail = NULL;
     s->length = 0;
@@ -14,7 +13,7 @@ set create_set(void) {
     return s;
 }
 
-void set_add(set s, int data) {
+void mset_add(multiset s, int data) {
     element *e;
 
     e = malloc(sizeof(element));
@@ -33,7 +32,7 @@ void set_add(set s, int data) {
     s->length++;
 }
 
-void remove_element(set s, int value) {
+void remove_element(multiset s, int value) {
     element *e, *e1;
 
     if (!s->length)
@@ -63,18 +62,18 @@ void remove_element(set s, int value) {
         }
 }
 
-set set_union(set s1, set s2) {
-    set s1_cpy, s2_cpy;
+multiset mset_union(multiset s1, multiset s2) {
+    multiset s1_cpy, s2_cpy;
     element *e;
 
-    s1_cpy = create_set();
-    s2_cpy = create_set();
+    s1_cpy = create_mset();
+    s2_cpy = create_mset();
 
     for (e = s1->head; e != NULL; e = e->next)
-        set_add(s1_cpy, e->data);
+        mset_add(s1_cpy, e->data);
 
     for (e = s2->head; e != NULL; e = e->next)
-        set_add(s2_cpy, e->data);
+        mset_add(s2_cpy, e->data);
 
     if (s2 == NULL)
         return s1_cpy;
@@ -87,40 +86,40 @@ set set_union(set s1, set s2) {
     return s1_cpy;
 }
 
-set set_intersection(set s1, set s2) {
-    set s_new;
+multiset mset_intersection(multiset s1, multiset s2) {
+    multiset s_new;
     element *e1, *e2;
 
     if (s1 == NULL || s2 == NULL)
-        return create_set();
+        return create_mset();
         
-    s_new = create_set();
+    s_new = create_mset();
 
     for (e1 = s1->head; e1 != NULL; e1 = e1->next)
         for (e2 = s2->head; e2 != NULL; e2 = e2->next)
             if (e1->data == e2->data)
-                set_add(s_new, e1->data);
+                mset_add(s_new, e1->data);
 
     return s_new;
 }
 
-set interval(int a, int b) {
-    set s;
+multiset interval(int a, int b) {
+    multiset s;
     int i;
 
-    s = create_set();
+    s = create_mset();
 
     for (i = a; i <= b; i++)
-        set_add(s, i);
+        mset_add(s, i);
 
     return s;
 }
 
-int cardinality(set s) {
+int cardinality(multiset s) {
     return s->length;
 }
 
-int set_contains(set s, int value) {
+int mset_contains(multiset s, int value) {
     element *e;
 
     if (!s->length)
@@ -135,7 +134,7 @@ int set_contains(set s, int value) {
     return 0;
 }
 
-int equivalent(set s1, set s2) {
+int equivalent(multiset s1, multiset s2) {
     element *e1, *e2;
     
     if (s1->length != s2->length)
@@ -153,7 +152,7 @@ int equivalent(set s1, set s2) {
     return 1;
 }
 
-void free_set(set s) {
+void free_mset(multiset s) {
     element *e;
 
     if (s->length) {
