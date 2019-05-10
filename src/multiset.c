@@ -8,7 +8,6 @@ multiset create_mset(void) {
     s = malloc(sizeof(multiset));
     s->head = NULL;
     s->tail = NULL;
-    s->length = 0;
 
     return s;
 }
@@ -29,18 +28,18 @@ void mset_add(multiset s, int data) {
     if (s->head == NULL)
         s->head = s->tail;
 
-    s->length++;
+    s->cardinality++;
 }
 
 void remove_element(multiset s, int value) {
     element *e, *e1;
 
-    if (!s->length)
+    if (!s->cardinality)
         return;
 
     for (e = s->head; e->next != NULL; e = e->next)
         if (e->data == value) {
-            if (s->length == 1) {
+            if (s->cardinality == 1) {
                 s->head = NULL;
                 free(e);
 
@@ -58,22 +57,15 @@ void remove_element(multiset s, int value) {
                 e->next = e1;
             }
 
-             s->length--;
+             s->cardinality--;
         }
 }
 
 multiset mset_union(multiset s1, multiset s2) {
     multiset s1_cpy, s2_cpy;
-    element *e;
 
-    s1_cpy = create_mset();
-    s2_cpy = create_mset();
-
-    for (e = s1->head; e != NULL; e = e->next)
-        mset_add(s1_cpy, e->data);
-
-    for (e = s2->head; e != NULL; e = e->next)
-        mset_add(s2_cpy, e->data);
+    s1_cpy = mset_copy(s1);
+    s2_cpy = mset_copy(s2);
 
     if (s2 == NULL)
         return s1_cpy;
@@ -90,7 +82,7 @@ multiset mset_intersection(multiset s1, multiset s2) {
     multiset s_new;
     element *e1, *e2;
 
-    if (s1 == NULL || s2 == NULL)
+    if (!s1->cardinality || !s2->cardinality)
         return create_mset();
         
     s_new = create_mset();
@@ -101,6 +93,57 @@ multiset mset_intersection(multiset s1, multiset s2) {
                 mset_add(s_new, e1->data);
 
     return s_new;
+}
+
+multiset mset_difference(multiset s1, multiset s2) {
+    multiset s_new;
+    element *e1, *e2;
+
+    if (!s1->cardinality)
+        return create_mset();
+
+    if (!s2->cardinality)
+        return mset_copy(s1);
+
+    s_new = create_mset();
+
+    for (e1 = s1->head; e1 != NULL; e1 = e1->next) {
+        for (e2 = s2->head; e2 != NULL; e2 = e2->next)
+            if (e1->data == e2->data)
+                break;
+
+        if (e2 == NULL)
+            mset_add(s_new, e1->data);
+    }
+
+    return s_new;
+}
+
+int mset_contains(multiset s, int value) {
+    element *e;
+
+    if (!s->cardinality)
+        return 0;
+
+    e = s->head;
+
+     for (e = s->head; e != NULL; e = e->next) 
+        if (e->data == value)
+            return 1;
+
+    return 0;
+}
+
+multiset mset_copy(multiset s) {
+    multiset s_cpy;
+    element *e;
+
+    s_cpy = create_mset();
+
+    for (e = s->head; e != NULL; e = e->next)
+        mset_add(s_cpy, e->data);
+
+    return s_cpy;
 }
 
 multiset interval(int a, int b) {
@@ -115,29 +158,28 @@ multiset interval(int a, int b) {
     return s;
 }
 
-int cardinality(multiset s) {
-    return s->length;
-}
-
-int mset_contains(multiset s, int value) {
+int multiplicity(multiset s, int value) {
     element *e;
-
-    if (!s->length)
-        return 0;
+    int m;
 
     e = s->head;
+    m = 0;
 
-     for (e = s->head; e != NULL; e = e->next) 
+    for (e = s->head; e != NULL; e = e->next)
         if (e->data == value)
-            return 1;
+            m++;
 
-    return 0;
+    return m;
+}
+
+int cardinality(multiset s) {
+    return s->cardinality;
 }
 
 int equivalent(multiset s1, multiset s2) {
     element *e1, *e2;
     
-    if (s1->length != s2->length)
+    if (s1->cardinality != s2->cardinality)
         return 0;
 
     for (e1 = s1->head; e1 != NULL; e1 = e1->next) {
@@ -155,7 +197,7 @@ int equivalent(multiset s1, multiset s2) {
 void free_mset(multiset s) {
     element *e;
 
-    if (s->length) {
+    if (s->cardinality) {
         e = s->head;
 
         while (s->head != NULL) {
@@ -166,7 +208,7 @@ void free_mset(multiset s) {
 
         s->head = NULL;
         s->tail = NULL;
-        s->length = 0;
+        s->cardinality = 0;
     }
 
     free(s);
