@@ -4,21 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
-struct node {
-    int data;
-    struct node *next;
-};
-
-typedef struct node node;
-
-struct list {
-    node *front;
-    node *end;
-    int length;
-};
-
-typedef struct list *list;
+#include "adt.h"
 
 /* Initialize list data structure */
 list create_list(void);
@@ -26,17 +12,17 @@ list create_list(void);
 /* Add item to end of list */
 void list_append(list, int data);
 
-/* Insert a value after the index provided */
-void list_insert(list, int index, int data);
-
 /* Return the value at an index */
 int list_get(list, int index);
 
-/* Return the index of the first occurrence of a value or -1 if unfound */
-int list_find(list, int data);
+/* Insert a value at the index provided, shifting all succeeding values */
+void list_insert(list, int index, int data);
 
 /* Set the value of an index */
 void list_replace(list, int index, int data);
+
+/* Return the index of the first occurrence of a value or -1 if unfound */
+int list_find(list, int data);
 
 /* Remove a index and return it's value */
 int list_cut(list, int);

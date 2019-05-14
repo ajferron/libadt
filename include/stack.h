@@ -2,19 +2,7 @@
 #define _STACK_H_
 
 #include <stdlib.h>
-
-struct frame {
-    int data;
-    struct frame *next;
-};
-
-typedef struct frame frame;
-
-struct stack {
-    frame *head;
-};
-
-typedef struct stack *stack;
+#include "adt.h"
 
 /* Initialize stack data structure (LIFO) */
 stack create_stack(void);

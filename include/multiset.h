@@ -1,23 +1,9 @@
 #ifndef _MSET_H_
 #define _MSET_H_
 
+#include "adt.h"
+
 #define EMPTY_SET NULL
-
-struct element {
-    int data;
-    struct element *next;
-};
-
-typedef struct element element;
-
-struct multiset {
-    element *head;
-    element *tail;
-    int cardinality;
-};
-
-typedef struct multiset *multiset;
-
 
 /* Initialize the multiset data structure */
 multiset create_mset(void);
