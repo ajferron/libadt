@@ -5,7 +5,7 @@
 multiset create_mset(void) {
     multiset s;
 
-    s = malloc(sizeof(multiset));
+    s = malloc(sizeof(struct multiset));
     s->head = NULL;
     s->tail = NULL;
 
