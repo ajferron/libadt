@@ -38,7 +38,7 @@ void mset_remove(multiset s, int value) {
     if (!s->cardinality)
         return;
 
-    for (e = s->head; e->next != NULL; e = e->next)
+    for (e = s->head; e != NULL; e = e->next)
         if (e->data == value) {
             if (s->cardinality == 1) {
                 s->head = NULL;
