@@ -8,6 +8,7 @@ multiset create_mset(void) {
     s = malloc(sizeof(struct multiset));
     s->head = NULL;
     s->tail = NULL;
+    s->cardinality = 0;
 
     return s;
 }
@@ -31,7 +32,7 @@ void mset_add(multiset s, int data) {
     s->cardinality++;
 }
 
-void remove_element(multiset s, int value) {
+void mset_remove(multiset s, int value) {
     element *e, *e1;
 
     if (!s->cardinality)
@@ -74,6 +75,7 @@ multiset mset_union(multiset s1, multiset s2) {
         return s2_cpy;
     
     s1_cpy->tail->next = s2_cpy->head;
+    s1_cpy->cardinality += s2->cardinality;
 
     return s1_cpy;
 }

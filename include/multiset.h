@@ -12,7 +12,7 @@ multiset create_mset(void);
 void mset_add(multiset, int data);
 
 /* Remove all occurences of an integer from the multiset */
-void remove_element(multiset, int);
+void mset_remove(multiset, int);
 
 /* Returns a set of all integers contained by s1 or s2 */
 multiset mset_union(multiset s1, multiset s2);
