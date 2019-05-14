@@ -3,7 +3,7 @@
 list create_list(void) {
     list l;
     
-    l = malloc(sizeof(list));
+    l = malloc(sizeof(struct list));
     l->front = NULL;
     l->end = NULL;
     l->length = 0;
@@ -30,32 +30,40 @@ void list_append(list l, int data) {
     l->length++;
 }
 
-void list_insert(list l, int index, int data) {
-    node *n, *h;
-    int i;
-
-    n = malloc(sizeof(node));
-    h = l->front;
-
-    for (i = 0; i < index; i++)
-        h = h->next;
-
-    n->data = data;
-    n->next = h->next;
-    h->next = n;
-    l->length++;
-}
-
 int list_get(list l, int index) {
     node *n;
     int  i;
     
     n = l->front;
     
-    for (i = 0; i < index && n->next != NULL; i++)
+    for (i = 0; i < index; i++)
         n = n->next;
 
     return n->data;
+}
+
+
+void list_insert(list l, int index, int data) {
+    node *new, *temp;
+    int i;
+
+    new = malloc(sizeof(node));
+    temp = l->front;
+    new->data = data;
+
+    if (index == 0) {
+        new->next = temp;
+        l->front = new;
+
+    } else {
+        for (i = 0; i < index - 1; i++)
+            temp = temp->next;
+
+        new->next = temp->next;
+        temp->next = new;
+    }
+
+    l->length++;
 }
 
 void list_replace(list l, int index, int data) {
@@ -64,8 +72,9 @@ void list_replace(list l, int index, int data) {
 
     n = l->front;
 
-    for (i = 0; i < index; i++)
+    for (i = 0; i < index; i++) {
         n = n->next;
+    }
 
     n->data = data;
 }

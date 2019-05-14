@@ -12,7 +12,7 @@ stack create_stack(void) {
 void stack_push(stack s, int data) {
     frame *n;
     
-    n = malloc(sizeof(frame));
+    n = malloc(sizeof(struct frame));
     n->data = data;
     n->next = s->head;
     s->head = n;

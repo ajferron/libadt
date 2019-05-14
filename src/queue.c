@@ -11,7 +11,7 @@ queue create_queue(void) {
 void enqueue(queue q, int data) {
     frame *f;
     
-    f = malloc(sizeof(frame));
+    f = malloc(sizeof(struct frame));
     f->data = data;
     f->next = NULL;
 
