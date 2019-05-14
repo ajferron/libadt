@@ -3,11 +3,12 @@
 #include "list.h"
 #include "stack.h"
 #include "queue.h"
+#include "multiset.h"
 
 #define TEST_LIST 1
 #define TEST_STACK 1
 #define TEST_QUEUE 1
-#define TEST_SET 1
+#define TEST_SET 0
 #define N 10
 #define C 'j'
 
@@ -16,116 +17,122 @@ int main(void) {
     list lst;
     stack stk;
     queue q;
+
     int i, j;
-
-    lst = init_list();
-    stk = init_stack();
-    q = init_queue();
-
-
-#if TEST_STACK
-
-    int *s_arr;
-
-    printf("\n-----------------------| TEST STACK |------------------------\n\n");
-
-    for (i = 0; i < N; i++) 
-        stack_push(stk, i);
-
-    s_arr = adt_array(stk) ;
-
-    for (i = 0; i < N; i++)
-        printf("%d ", s_arr[i]);
-
-    printf("\n");
-
-    for (i = 0; i < N; i++)
-        printf("%d ", stack_pop(stk));
-
-    printf("\n");
-
-    free(s_arr);
-
-#endif
-
-
-#if TEST_QUEUE
-
-    int c, *q_arr;
-    char *q_str;
-
-    printf("\n------------------------| TEST QUEUE |-------------------------\n\n");
-
-    for (c = 'a'; c < C; c++)
-        enqueue(q, c);
-
-    q_arr = adt_array(q);
-
-    for (i = 0; i < N; i++)
-        printf("%c ", q_arr[i]);
-
-    q_str = adt_string(q, ", ", 2);
-    printf("\n%s\n", q_str);
-
-    while (!adt_empty(q))
-        printf("%c ", dequeue(q));
-
-    printf("\n");
-
-    free(q_arr);
-    free(q_str);
-
-#endif
-
 
 #if TEST_LIST
 
-    printf("\n------------------------| TEST LIST |------------------------\n");
+    int c, *l_arr;
+    char *l_str;
 
-    int *l_arr;
+    lst = create_list();
+    c = 'a';
 
-    for (i = 0; i < N; i++){
-        printf("%c ", i);
-        list_append(lst, i);
-    }
-
-    for (i = 0; i < N; i++) {
-        list_replace(lst, i, i + 50);
-        printf("\nlist_replace(lst, %d, %d) \t list_get(%d) = %d \t list_len(lst) = %d", i, i + 50, i, list_get(lst, i), list_len(lst));
-    }
-
-    printf("\n");
+    printf("\n------------------------| TEST LIST |------------------------\n\n");
 
     for (i = 0; i < N; i++)
-        printf("\nlist_find(lst, %d) = %d", i + 50, list_find(lst, i + 50));
+        list_append(lst, i + 10);
 
-    printf("\n");
+    for (i = 0; i < N; i++) {
+        list_replace(lst, i, c + i);
+        printf("\nlist_replace(lst, %d, %d) \t list_get(%d) = %d \t list_len(lst) = %d", i, c + i, i, list_get(lst, i), list_len(lst));
+    }
 
-    for (i = 0; i < N*2; i+=2) {
-        list_insert(lst, i, i + 1);
-        printf("\nlist_insert(lst, %d, %d) \t list_get(%d + 1) = %d \t list_lstlen(lst) = %d\n", i, i + 1, i, list_get(lst, i + 1), list_len(lst));
+    printf("\n\n");
 
-        l_arr = adt_array(lst);
+    for (i = 0; i < N; i++)
+        printf("\nlist_find(lst, %d) = %d", c + i, list_find(lst, c + i));
+
+    printf("\n\n");
+
+    for (i = 0; i < N*2; i += 2) {
+        list_insert(lst, i, i + 2);
+        printf("\nlist_insert(lst, %d, %d) | list_get(%d) = %d | list_len(lst) = %d\nlist = { ", i, i + 2, i, list_get(lst, i), list_len(lst));
+
+        l_arr = list_array(lst);
 
         for (j = 0; j < list_len(lst); j++)
             printf("%d ", l_arr[j]);
 
-        printf("\n");
+        printf("}\n");
 
         free(l_arr);
     }
+
+    printf("\n");
+    
+    for (i = 0, c = '0'; i < N*2; i += 2, c++) {
+        list_replace(lst, i, c);
+        printf("\nlist_replace(lst, %d, %d) | list_get(%d) = %d | list_len(lst) = %d\nlist = { ", i, c + i, i, list_get(lst, i), list_len(lst));
+
+        l_arr = list_array(lst);
+
+        for (j = 0; j < list_len(lst); j++)
+            printf("%d ", l_arr[j]);
+
+        printf("}\n");
+
+        free(l_arr);
+    }
+
+    l_str = list_string(lst, ", ", 2);
+    printf("\n\nlist_string(lst, \", \", 2) = \"%s\"\n\n", l_str);
 
     while(list_len(lst))
         printf("\nlist_cut(lst, %d) = %d \t list_len(lst) = %d", 0, list_cut(lst, 0), list_len(lst));
 
     printf("\n\n");
 
+    free_list(lst);
+    free(l_str);
+
 #endif
 
 
-    adt_clear(lst);
-    adt_clear(stk);
-    adt_clear(q);
+#if TEST_STACK
+
+    stk = create_stack();
+
+    printf("\n-----------------------| TEST STACK |------------------------\n");
+
+    for (i = 0; i < N; i++) { 
+        stack_push(stk, i);
+        printf("\nstack_push(stk, %d) | stack_peek(stk) = %d ", i, stack_peek(stk));
+    }
+
+    printf("\n\n");
+
+    for (i = 0; i < N; i++)
+        printf("\nstack_pop(stk) = %d", stack_pop(stk));
+
+    printf("\n\n");
+
+    free_stack(stk);
+
+#endif
+
+
+#if TEST_QUEUE
+
+    q = create_queue();
+
+    printf("\n------------------------| TEST QUEUE |-------------------------\n");
+
+    for (i = 0; i < N; i++) { 
+        enqueue(q, i);
+        printf("\nenqueue(q, %d) | queue_head(q) = %d | queue_tail(q) = %d", i, queue_head(q), queue_tail(q));
+    }
+
+    printf("\n\n");
+
+    while (!queue_empty(q))
+        printf("\ndequeue(q) = %d", dequeue(q));
+
+    printf("\n\n");
+
+    free_queue(q);
+
+#endif
 
     return 0;
 }
