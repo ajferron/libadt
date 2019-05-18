@@ -1,7 +1,7 @@
-# libadt
+# libadt 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/127d5c30fa534f46beec2516c5ce579b)](https://www.codacy.com/app/af3r/libadt?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=af3r/libadt&amp;utm_campaign=Badge_Grade)
 
 ## Structures
-
 
 ### List
 > In computer science, a list or sequence is an abstract data type that represents a countable number of ordered values, where the same value may occur more than once. - [Wikipedia](https://en.wikipedia.org/wiki/List_(abstract_data_type))
@@ -23,9 +23,7 @@
 | list_string   | O(n)       | Return a string of all integers (casted to char) seperated by an iterator       |
 | free_list     | O(n)       | Free all memory allocated to the data structure                                 |
 
-
 ___
-
 
 ### Stack
 > In computer science, a stack is an abstract data type that serves as a collection of elements. The order in which elements come off a stack gives rise to its alternative name, LIFO (last in, first out). - [Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
@@ -41,9 +39,7 @@ ___
 | stack_empty   | O(1)       | Return 1 if the queue is empty and 0 otherwise        |
 | free_stack    | O(n)       | Free all memory allocated to the data structure       |
 
-
 ___
-
 
 ### Queue
 
@@ -61,9 +57,7 @@ ___
 | queue_empty   | O(1)       | Return 1 if the queue is empty and 0 otherwise          |
 | free_queue    | O(n)       | Free all memory allocated to the data structure         |
 
-
 ___
-
 
 ### Multiset
 
