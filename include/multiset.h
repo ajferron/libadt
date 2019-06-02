@@ -9,10 +9,10 @@
 multiset create_mset(void);
 
 /* Add an integer to the multiset */
-void mset_add(multiset, int data);
+void mset_add(multiset, void *data);
 
 /* Remove all occurences of an integer from the multiset */
-void mset_remove(multiset, int);
+void mset_remove(multiset, void*);
 
 /* Returns a set of all integers contained by s1 or s2 */
 multiset mset_union(multiset s1, multiset s2);
@@ -24,16 +24,13 @@ multiset mset_intersection(multiset s1, multiset s2);
 multiset mset_difference(multiset s1, multiset s2);
 
 /* Return 0 if the set does not contain the value and 1 otherwise */
-int mset_contains(multiset, int);
+int mset_contains(multiset, void*);
 
 /* Returns a new set that contains all the values of the  set passed */
 multiset mset_copy(multiset);
 
-/* Returns the set of all the integers greater/equal to a and less/equal b */
-multiset interval(int a, int b);
-
 /* Returns the number of instances of an element */
-int multiplicity(multiset s, int);
+int multiplicity(multiset s, void*);
 
 /* Return the number of distinct elements in a set */
 int cardinality(multiset);

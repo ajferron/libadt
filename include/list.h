@@ -10,31 +10,25 @@
 list create_list(void);
 
 /* Add item to end of list */
-void list_append(list, int data);
+void list_append(list, void *data);
 
 /* Return the value at an index */
-int list_get(list, int index);
+void* list_get(list, int index);
 
 /* Insert a value at the index provided, shifting all succeeding values */
-void list_insert(list, int index, int data);
+void list_insert(list, int index, void *data);
 
 /* Set the value of an index */
-void list_replace(list, int index, int data);
+void list_replace(list, int index, void *data);
 
 /* Return the index of the first occurrence of a value or -1 if unfound */
-int list_find(list, int data);
+int list_find(list, void *target);
 
 /* Remove a index and return it's value */
-int list_cut(list, int);
+void* list_cut(list, int);
 
 /* Return the number of integers in the list if it is initialized and -1 otherwise  */
 int list_len(list);
-
-/* Return a pointer to an array of all integers in the data structure */
-void* list_array(list);
-
-/* Return a pointer to an array of the characters in the data structure seperated by an interable */
-char* list_string(list, char *iterable, size_t iter_len);
 
 /* Free all memory allocated to the data structure */
 void free_list(list);

@@ -1,46 +1,46 @@
 #include "queue.h"
 
 queue create_queue(void) {
-    queue q = malloc(sizeof(queue));
+    queue q = malloc(sizeof(struct queue));
     q->head = NULL;
     q->tail = NULL;
 
     return q;
 }
 
-void enqueue(queue q, int data) {
-    frame *f;
+void enqueue(queue q, void *data) {
+    node *n;
     
-    f = malloc(sizeof(struct frame));
-    f->data = data;
-    f->next = NULL;
+    n = malloc(sizeof(node));
+    n->data = data;
+    n->next = NULL;
 
     if (q->tail != NULL)
-        q->tail->next = f;
+        q->tail->next = n;
 
-    q->tail = f;
+    q->tail = n;
 
     if (q->head == NULL)
         q->head = q->tail;
 }
 
-int dequeue(queue q) {
-    frame *f;
-    int data;
+void* dequeue(queue q) {
+    node *n;
+    void* data;
     
-    f = q->head;
-    q->head = f->next;
-    data = f->data;
-    free(f);
+    n = q->head;
+    q->head = n->next;
+    data = n->data;
+    free(n);
 
     return data;
 }
 
-int queue_head(queue q) {
+void* queue_head(queue q) {
     return q->head->data;
 }
 
-int queue_tail(queue q) {
+void* queue_tail(queue q) {
     return q->tail->data;
 }
 
@@ -52,15 +52,15 @@ int queue_empty(queue q) {
 }
 
 void free_queue(queue q) {
-    frame *f;
+    node *n;
 
     if (q->head != NULL) {
-        f = q->head;
+        n = q->head;
 
         while (q->head != NULL) {
-            f = f->next;
+            n = n->next;
             free(q->head);
-            q->head = f;
+            q->head = n;
         }
 
         q->head = NULL;

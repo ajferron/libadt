@@ -8,16 +8,16 @@
 queue create_queue(void);
 
 /* Add integer to top of que */
-void enqueue(queue, int data);
+void enqueue(queue, void *data);
 
 /* Remove and return bottom integer in que */
-int dequeue(queue);
+void* dequeue(queue);
 
 /* Return the integer at the front of the que (first added) */
-int queue_head(queue);
+void* queue_head(queue);
 
 /* Return the integer at the end of the que (last added) */
-int queue_tail(queue);
+void* queue_tail(queue);
 
 /* Return 1 if the queue is empty and 0 otherwise */
 int queue_empty(queue);

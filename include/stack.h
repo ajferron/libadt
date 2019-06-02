@@ -8,13 +8,13 @@
 stack create_stack(void);
 
 /* Add integer to the top of stack */
-void stack_push(stack, int data);
+void stack_push(stack, void *data);
 
 /* Remove and return the last integer added */
-int stack_pop(stack);
+void* stack_pop(stack);
 
 /* Return the head of the stack (last added) */
-int stack_peek(stack);
+void* stack_peek(stack);
 
 /* Return 1 if the stack is empty and 0 otherwise */
 int stack_empty(stack);

@@ -1,34 +1,12 @@
 #ifndef _ADT_H_
 #define _ADT_H_
 
-struct element {
-    int data;
-    struct element *next;
-};
-
-typedef struct element element;
-
-struct frame {
-    int data;
-    struct frame *next;
-};
-
-typedef struct frame frame;
-
 struct node {
-    int data;
+    void *data;
     struct node *next;
 };
 
 typedef struct node node;
-
-struct multiset {
-    element *head;
-    element *tail;
-    int cardinality;
-};
-
-typedef struct multiset *multiset;
 
 struct list {
     node *front;
@@ -39,16 +17,24 @@ struct list {
 typedef struct list *list;
 
 struct queue {
-    frame *head;
-    frame *tail;
+    node *head;
+    node *tail;
 };
 
 typedef struct queue *queue;
 
 struct stack {
-    frame *head;
+    node *head;
 };
 
 typedef struct stack *stack;
+
+struct multiset {
+    node *head;
+    node *tail;
+    int cardinality;
+};
+
+typedef struct multiset *multiset;
 
 #endif

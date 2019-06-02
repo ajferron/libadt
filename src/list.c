@@ -11,7 +11,7 @@ list create_list(void) {
     return l;
 }
 
-void list_append(list l, int data) {
+void list_append(list l, void *data) {
     node *n;
 
     n = malloc(sizeof(node));
@@ -30,7 +30,7 @@ void list_append(list l, int data) {
     l->length++;
 }
 
-int list_get(list l, int index) {
+void* list_get(list l, int index) {
     node *n;
     int  i;
     
@@ -42,8 +42,7 @@ int list_get(list l, int index) {
     return n->data;
 }
 
-
-void list_insert(list l, int index, int data) {
+void list_insert(list l, int index, void *data) {
     node *new, *temp;
     int i;
 
@@ -66,7 +65,7 @@ void list_insert(list l, int index, int data) {
     l->length++;
 }
 
-void list_replace(list l, int index, int data) {
+void list_replace(list l, int index, void *data) {
     node *n;
     int i;
 
@@ -79,7 +78,7 @@ void list_replace(list l, int index, int data) {
     n->data = data;
 }
 
-int list_find(list l, int target) {
+int list_find(list l, void *target) {
     node *n;
     int i;
 
@@ -95,9 +94,10 @@ int list_find(list l, int target) {
     return -1;
 }
 
-int list_cut(list l, int index) {
+void* list_cut(list l, int index) {
     node *n, *n1;
-    int i, data;
+    void* data;
+    int i;
 
     n = l->front;
 
@@ -118,6 +118,7 @@ int list_cut(list l, int index) {
         data = (n->next)->data;
         free(n->next);
         n->next = NULL;
+
     } else {
         data = (n->next)->data;
         n1 = (n->next)->next;
@@ -135,49 +136,6 @@ int list_len(list lst) {
         return lst->length;
 
     return -1;
-}
-
-void* list_array(list l) {
-    node *n;
-    int *a, i;
-
-    if (!l->length)
-        return NULL;
-
-    n = l->front;
-
-    a = malloc(sizeof(int) * l->length);
-
-    for (i = 0; i < l->length; i++) {
-        a[i] = n->data;
-        n = n->next;
-    }
-    
-    return a;
-}
-
-char* list_string(list l, char* iterable, size_t iter_len) {
-    node *n;
-    int len, i;
-    char *s;
-    
-    if (!l->length)
-        return NULL;
-
-    len = l->length + (iter_len * l->length);
-    s = malloc((sizeof(char)) * len);
-    n = l->front;
-
-    for (i = 0; i < len; i += iter_len + 1) {
-        sprintf(&s[i], "%c", (char) n->data);
-
-        if (i + iter_len + 1 < len)
-            strcat(s, iterable);
-
-        n = n->next;
-    }
-
-    return s;
 }
 
 void free_list(list l) {
