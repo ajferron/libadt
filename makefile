@@ -11,3 +11,4 @@ obj/%.o : src/%.c
 
 clean:
 	rm -rf obj/* bin/* bin/libadt.a
+
