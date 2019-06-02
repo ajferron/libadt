@@ -11,16 +11,14 @@
 | Function Name | Complexity | Description                                                                     |
 | :------------ | :--------: | :-------------------------------------------------------------------------------| 
 | create_list   | O(1)       | Initialize list data structure                                                  |
-| list_prepend  | O(1)       | Add an integer to front of list                                                 |
-| list_append   | O(1)       | Add an integer to end of list                                                   |
-| list_insert   | O(n)       | Insert a value after the given index                                            |
-| list_get      | O(n)       | Return the value at an index                                                    |
-| list_find     | O(n)       | Return the index of the first occurrence of a value or -1 if unfound            |
-| list_replace  | O(n)       | Set the value of an index                                                       |
-| list_cut      | O(n)       | Remove a index and return it's value                                            |
-| list_len      | O(1)       | Return the number of integers in the list if it is initialized and -1 otherwise |
-| list_array    | O(n)       | Return a pointer to a array of all integers in the list data structure          |
-| list_string   | O(n)       | Return a string of all integers (casted to char) seperated by an iterator       |
+| list_prepend  | O(1)       | Add an element to the front of the list                                         |
+| list_append   | O(1)       | Add an element to the end of the list                                           |
+| list_insert   | O(n)       | Insert an element after the given index                                         |
+| list_get      | O(n)       | Return the element at an index                                                  |
+| list_find     | O(n)       | Return the index of the first occurrence of an item or -1 if unfound            |
+| list_replace  | O(n)       | Replace an element at an index                                                  |
+| list_cut      | O(n)       | Remove the element at an index and return it's data                             |
+| list_len      | O(1)       | Return the number of elements in the list if it is initialized and -1 otherwise |
 | free_list     | O(n)       | Free all memory allocated to the data structure                                 |
 
 ___
@@ -33,9 +31,9 @@ ___
 | Function Name | Complexity | Description                                           |
 | :------------ | :--------: | :-----------------------------------------------------| 
 | create_stack  | O(1)       | Initialize stack data structure                       |
-| stack_push    | O(1)       | Add integer to the top of stack                       |
-| stack_pop     | O(1)       | Remove and return the integer at the top of the stack |
-| stack_peek    | O(1)       | Return the integer at the top of the stack            |
+| stack_push    | O(1)       | Add an element to the top of stack                    |
+| stack_pop     | O(1)       | Remove and return the element at the top of the stack |
+| stack_peek    | O(1)       | Return the element at the top of the stack            |
 | stack_empty   | O(1)       | Return 1 if the queue is empty and 0 otherwise        |
 | free_stack    | O(n)       | Free all memory allocated to the data structure       |
 
@@ -50,10 +48,10 @@ ___
 | Function Name | Complexity | Description                                             |
 | :------------ | :--------: | :-------------------------------------------------------|
 | create_queue  | O(1)       | Initialize queue data structure                         |
-| enqueue       | O(1)       | Add integer to the end of queue                         |
-| dequeue       | O(1)       | Remove and return the integer at the front of the queue |
-| queue_head    | O(1)       | Return the integer at the front of the queue            |
-| queue_tail    | O(1)       | Return the integer at the end of the queue              |
+| enqueue       | O(1)       | Add an element to the end of queue                      |
+| dequeue       | O(1)       | Remove and return the element at the front of the queue |
+| queue_head    | O(1)       | Return the element at the front of the queue            |
+| queue_tail    | O(1)       | Return the element at the end of the queue              |
 | queue_empty   | O(1)       | Return 1 if the queue is empty and 0 otherwise          |
 | free_queue    | O(n)       | Free all memory allocated to the data structure         |
 
@@ -68,14 +66,13 @@ ___
 | Function Name     | Complexity | Description                                                                   |
 | :---------------- | :--------: | :---------------------------------------------------------------------------- |
 | create_mset       | O(1)       | Initialize multiset data structure                                            |
-| mset_add          | O(1)       | Add an integer to the multiset                                                |
-| remove_element    | O(1)       | Remove all occurences of an integer from the multiset                         |
+| mset_add          | O(1)       | Add an element to the multiset                                                |
+| remove_element    | O(1)       | Remove all occurences of an element from the multiset                         |
 | mset_union        | O(1)       | Returns a multiset that contains all elements of 2 multisets                  |
-| mset_intersection | O(1)       | Returns a multiset of all integers that are common between 2 multisets        |
+| mset_intersection | O(1)       | Returns a multiset of all elements that are common between 2 multisets        |
 | mset_difference   | O(1)       | Returns the difference of two multisets                                       |
-| interval          | O(n)       | Returns the set of all the integers greater/equal to a and less/equal b       |
-| multiplicity      | O(n)       | Returns the number of instances of an element                                 |
-| cardinality       | O(n)       | Return the number of distinct elements in a set                               |
-| mset_contains     | O(n)       | Return 0 if the set does not contain the value and 1 otherwise                |
+| multiplicity      | O(n)       | Returns the number of occurences of an element                                |
+| cardinality       | O(n)       | Return the number of distinct elements                                        |
+| mset_contains     | O(n)       | Return 1 if the set contains the element and 0 otherwise                      |
 | equivalent        | O(n)       | Return 1 if 2 sets contain the same elements, each with the same multiplicity |
 | free_mset         | O(n)       | Free all memory allocated to the data structure                               |
