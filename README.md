@@ -1,6 +1,8 @@
 # libadt 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/127d5c30fa534f46beec2516c5ce579b)](https://www.codacy.com/app/af3r/libadt?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=af3r/libadt&amp;utm_campaign=Badge_Grade)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f710818856424856a53ea09b2d25f142)](https://app.codacy.com/app/af3r/libadt?utm_source=github.com&utm_medium=referral&utm_content=af3r/libadt&utm_campaign=Badge_Grade_Dashboard)
+
 ## Structures
 
 ### List
